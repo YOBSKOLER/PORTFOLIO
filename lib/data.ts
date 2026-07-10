@@ -2,132 +2,328 @@ export const skillsData = [
   {
     category: "Frontend",
     color: "#ec4899",
-    colorClass: "text-[#ec4899]",
-    bgClass: "bg-[#ec4899]/20",
-    skills: ["Vue", "React", "Nuxt", "Next.js", "Tailwindcss", "Shadcn UI"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    skills: [
+      {
+        name: "Vue",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "React",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Nuxt",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Next.js",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Tailwindcss",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Shadcn UI",
+        icon: "https://avatars.githubusercontent.com/u/139895814?s=200&v=4",
+        unlocked: true,
+      },
+      {
+        name: "Svelte",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg",
+        unlocked: false,
+      },
+      {
+        name: "Angular",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+        unlocked: false,
+      },
+    ],
   },
   {
     category: "Backend",
     color: "#06b6d4",
-    colorClass: "text-[#06b6d4]",
-    bgClass: "bg-[#06b6d4]/20",
-    skills: ["Laravel", "Node.js", "Spring Boot", "NestJS", "Axum", "FastAPI"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    skills: [
+      {
+        name: "Laravel",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Node.js",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "NestJS",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "FastAPI",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Spring Boot",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+        unlocked: false,
+      },
+      {
+        name: "Django",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
+        unlocked: false,
+      },
+      {
+        name: "GraphQL",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
+        unlocked: false,
+      },
+      {
+        name: "Rust/Axum",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg",
+        unlocked: false,
+      },
+    ],
   },
   {
-    category: "Mobile & others",
+    category: "Mobile & Others",
     color: "#a78bfa",
-    colorClass: "text-[#a78bfa]",
-    bgClass: "bg-[#a78bfa]/20",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     skills: [
-      "Android (Kotlin)",
-      "React Native",
-      "Git",
-      "Scrum & Kanban",
-      "SDLC",
-      "System design",
+      {
+        name: "React Native",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Expo",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/expo/expo-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Git",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Android (Kotlin)",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Flutter",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+        unlocked: false,
+      },
+      {
+        name: "Swift",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
+        unlocked: false,
+      },
     ],
   },
   {
     category: "Languages",
     color: "#f59e0b",
-    colorClass: "text-[#f59e0b]",
-    bgClass: "bg-[#f59e0b]/20",
-    skills: ["TypeScript", "PHP", "Python", "Rust", "Kotlin", "Java"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    skills: [
+      {
+        name: "TypeScript",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "PHP",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Python",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Kotlin",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Rust",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg",
+        unlocked: false,
+      },
+      {
+        name: "Go",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg",
+        unlocked: false,
+      },
+      {
+        name: "Java",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "C++",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+        unlocked: false,
+      },
+    ],
   },
   {
     category: "DevOps",
     color: "#3b82f6",
-    colorClass: "text-[#3b82f6]",
-    bgClass: "bg-[#3b82f6]/20",
-    skills: ["CI/CD", "Linux", "Docker", "Kubernetes", "AWS", "Google Cloud"],
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    skills: [
+      {
+        name: "Docker",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Linux",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "GitHub Actions",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "AWS",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+        unlocked: true,
+      },
+      {
+        name: "Kubernetes",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg",
+        unlocked: false,
+      },
+      {
+        name: "Terraform",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg",
+        unlocked: false,
+      },
+      {
+        name: "Google Cloud",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+        unlocked: false,
+      },
+    ],
   },
   {
-    category: "Data tools & databases",
+    category: "Data & Databases",
     color: "#f97316",
-    colorClass: "text-[#f97316]",
-    bgClass: "bg-[#f97316]/20",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
     skills: [
-      "Tableau",
-      "Microsoft Power BI",
-      "Redis",
-      "PostgreSQL",
-      "MySQL",
-      "MongoDB",
+      {
+        name: "PostgreSQL",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "MySQL",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "MongoDB",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Redis",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "Tableau",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+        unlocked: false,
+      },
+      {
+        name: "Elasticsearch",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg",
+        unlocked: false,
+      },
     ],
+  },
+];
+
+export const certifications = [
+  {
+    title: "Coming Soon",
+    issuer: "Your First Certification",
+    date: "2025",
+    color: "#7c3aed",
+    logo: "",
+    link: "#",
   },
 ];
 
 export const experienceData = [
   {
-    role: "Lead Developer",
-    company: "KTC",
-    location: "Douala, Cameroon",
-    period: "2024 - Present",
-    periodColor: "#7c3aed",
-    periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
-    description:
-      "Leading the development of web applications using React and NestJS, while coordinating a team of developers. Established CI/CD pipelines to improve deployment efficiency and implemented microservices architecture to enhance system scalability.",
-    tags: [
-      "React",
-      "NestJS",
-      "TypeScript",
-      "PostgreSQL",
-      "Microservices",
-      "CI/CD",
-    ],
-  },
-  {
     role: "Fullstack Developer",
-    company: "Yemba Group",
+    objective: "Intership",
+    objectiveBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
+    company: "Glotelho",
     location: "Douala, Cameroon",
-    period: "2023 - 2024",
+    period: "9 feb 2026 - 27 june 2026",
     periodColor: "#f97316",
     periodBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
     description:
       "Designed and developed an e-commerce platform and transit management solution. Integrated secure payment gateways and implemented route optimization algorithms. Created a responsive mobile app using React Native.",
-    tags: ["Laravel", "Vue", "React Native", "PostgreSQL", "Docker"],
-  },
-  {
-    role: "Mobile Developer",
-    company: "Keree",
-    location: "Douala, Cameroon",
-    period: "2022 - 2023",
-    periodColor: "#06b6d4",
-    periodBadgeClass: "text-[#06b6d4] border-[#06b6d4]/60 bg-[#06b6d4]/15",
-    description:
-      "Built cross-platform mobile applications with React Native & Expo. Implemented real-time features with WebSockets and optimized app performance.",
-    tags: ["React Native", "Expo", "TypeScript", "Node.js", "WebSockets"],
+    tags: ["Laravel", "Sactum", "React JS", "MySQL", "Docker"],
   },
 ];
 
 export const educationData = [
   {
     degree: "Master of Engineering in Data Science & AI",
-    school: "IUC Douala",
+    school: "IUT Douala",
+    objective: "DUT",
+    objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     location: "Douala, Cameroon",
     period: "2022 - 2025",
     periodColor: "#7c3aed",
     periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     description:
-      "Advanced program focusing on building expertise in machine learning algorithms, neural networks, and AI applications. Developed skills in processing large datasets, creating predictive models, and implementing computer vision solutions.",
-    tags: [
-      "Machine learning",
-      "Data science",
-      "Data visualization",
-      "Advanced databases",
-      "Computer architecture",
-    ],
+      "Comprehensive program covering core computer science concepts with emphasis on algorithm design and analysis. Studied advanced software architecture patterns and distributed computing principles.",
+    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
+  },
+  {
+    degree: "Master of Engineering in Data Science & AI",
+    school: "IUT Douala",
+    objective: "DUT",
+    objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
+    location: "Douala, Cameroon",
+    period: "2022 - 2025",
+    periodColor: "#7c3aed",
+    periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
+    description:
+      "Comprehensive program covering core computer science concepts with emphasis on algorithm design and analysis. Studied advanced software architecture patterns and distributed computing principles.",
+    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
   },
   {
     degree: "Bachelor of Science in Computer Science",
-    school: "IUC Douala",
+    school: "GBHS Bobongo",
+    objective: "GCE A/L",
+    objectiveBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
     location: "Douala, Cameroon",
-    period: "2021 - 2022",
+    period: "2023 - 2024",
     periodColor: "#f97316",
     periodBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
     description:
       "Comprehensive program covering core computer science concepts with emphasis on algorithm design and analysis. Studied advanced software architecture patterns and distributed computing principles.",
-    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
+    tags: ["MATHS", "PHYSICS", "COMPUTER SCIENCE", "CHEMISTRY", "BIOLOGY"],
   },
 ];
 

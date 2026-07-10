@@ -6,6 +6,7 @@ import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
 import { Contact } from "@/components/sections/Contact";
+import { Certifications } from "@/components/sections/Certifications"; // ← AJOUT
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Skills />
       <Experience />
       <Projects />
+      <Certifications /> {/* ← AJOUT */}
       <Contact />
       {/* <Footer /> */}
     </main>

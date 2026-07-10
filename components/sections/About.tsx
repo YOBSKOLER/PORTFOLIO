@@ -8,7 +8,7 @@ import {
   GraduationCap,
   Calendar,
   Code2,
-  Smartphone,
+  // Smartphone,
   Database,
   Server,
   CheckCircle2,
@@ -17,28 +17,32 @@ import {
 
 const interests = [
   "Opensource",
+  "Big Tech",
   "Tech in Africa",
   "AI Research",
   "Startup",
   "FinTech",
   "Football",
   "FC Barcelona",
+  "#Messi G.O.A.T"
 ];
 const interestClasses = [
   "text-[#7c3aed] border-[#7c3aed]/50 bg-[#7c3aed]/15",
+  "text-[#5c6aed] border-[#5c6aed]/50 bg-[#5c6aed]/15",
   "text-[#06b6d4] border-[#06b6d4]/50 bg-[#06b6d4]/15",
   "text-[#8b5cf6] border-[#8b5cf6]/50 bg-[#8b5cf6]/15",
   "text-[#f97316] border-[#f97316]/50 bg-[#f97316]/15",
   "text-[#06b6d4] border-[#06b6d4]/50 bg-[#06b6d4]/15",
   "text-[#10b981] border-[#10b981]/50 bg-[#10b981]/15",
   "text-[#ef4444] border-[#ef4444]/50 bg-[#ef4444]/15",
+  "text-[#af80cf] border-[#af80cf]/50 bg-[#af80cf]/15",
 ];
 
 const consultancyItems = [
   "Software architecture & system design",
   "Web & mobile application development",
   "API design & integration",
-  "Server administration & infrastructure management",
+  // "Server administration & infrastructure management",
 ];
 
 const competencies = [
@@ -48,12 +52,12 @@ const competencies = [
     titleKey: "softwareEng",
     descKey: "softwareDesc",
   },
-  {
-    icon: Smartphone,
-    colorClass: "text-[#06b6d4]",
-    titleKey: "dataScience",
-    descKey: "dataDesc",
-  },
+  // {
+  //   icon: Smartphone,
+  //   colorClass: "text-[#06b6d4]",
+  //   titleKey: "dataScience",
+  //   descKey: "dataDesc",
+  // },
   {
     icon: Database,
     colorClass: "text-[#10b981]",

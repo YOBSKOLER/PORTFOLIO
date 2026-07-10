@@ -11,10 +11,10 @@ export const translations = {
     },
     hero: {
       greeting: "Hi, I'm",
-      name: "YOBS KOLER",
+      name: "YOBS KOHLER",
       subtitle:
         "I build scalable web & mobile solutions, and explore AI for smarter tech.",
-      email: "hi@yobskoler.com",
+      email: "yobskoler9@gmail.com",
       downloadCV: "Download Resume",
       contactMe: "Contact Me",
       yearsExp: "Years Experience",
@@ -30,14 +30,14 @@ export const translations = {
       subtitle:
         "Software engineer passionate about creating solutions at the intersection of web and mobile",
       journey: "My journey",
-      bio1: "I'm a fullstack developer based in Douala, Cameroon, passionate about the transformative power of technology. I've developed expertise in building modern web applications and exploring mobile development, fields critical for future advancements.",
-      bio2: "My journey spans frontend, backend, database modeling, and server deployment across diverse industries. With years of professional experience, I've mastered various technology stacks and methodologies that enable me to tackle complex problems.",
+      bio1: "I'm a fullstack developer based in Douala, Cameroon, passionate about the transformative power of technology. I've developed expertise in building modern web applications and exploring mobile development & DevOps , fields critical for future advancements.",
+      bio2: "My journey spans frontend, backend, database modeling, and server deployment across diverse projects. With years of professional experience, I've mastered various technology stacks and methodologies that enable me to tackle complex problems.",
       competencies: "Core competencies",
       competenciesDesc:
         "Fueled by years of dedicated hands-on experience and an unwavering commitment to continuous learning, I have cultivated robust expertise across pivotal technical domains.",
       softwareEng: "Software Engineering",
       softwareDesc:
-        "Expert in fullstack development, creating scalable solutions with modern frameworks and architectures. Proficient in designing RESTful APIs and implementing microservices.",
+        "Expert in fullstack development, creating scalable solutions with modern frameworks and architectures. Proficient in designing RESTful APIs and System Design.",
       dataScience: "Mobile Development",
       dataDesc:
         "Building cross-platform mobile apps with React Native & Expo, focused on performance and user experience.",
@@ -45,12 +45,11 @@ export const translations = {
       dbDesc:
         "Designing and optimizing database systems for performance, scalability and data integrity.",
       devops: "DevOps & Server Administration",
-      devopsDesc:
-        "Managing infrastructure, CI/CD pipelines, containerization and cloud deployments.",
+      devopsDesc: "CI/CD pipelines, containerization ",
       personalDetails: "Personal details",
       name: "Name",
       age: "Age",
-      ageVal: "27 years",
+      ageVal: "22 years",
       location2: "Location",
       education: "Education",
       eduVal: "Master of Engineering in Data Science & AI",
@@ -114,10 +113,10 @@ export const translations = {
     },
     hero: {
       greeting: "Bonjour, je suis",
-      name: "YOBS KOLER",
+      name: "YOBS KOHLER",
       subtitle:
         "Je construis des solutions web & mobile scalables et explore l'IA pour une tech plus intelligente.",
-      email: "hi@yobskoler.com",
+      email: "yobskoler9@gmail.com",
       downloadCV: "Télécharger CV",
       contactMe: "Me contacter",
       yearsExp: "Ans d'expérience",
@@ -140,7 +139,7 @@ export const translations = {
         "Fort de nombreuses années d'expérience pratique et d'un engagement indéfectible envers l'apprentissage continu, j'ai cultivé une expertise robuste dans les domaines techniques essentiels.",
       softwareEng: "Génie logiciel",
       softwareDesc:
-        "Expert en développement fullstack, création de solutions scalables avec des frameworks et architectures modernes. Maîtrise de la conception d'APIs RESTful et de l'implémentation de microservices.",
+        "Expert en développement fullstack, création de solutions scalables avec des frameworks et architectures modernes. Maîtrise de la conception d'APIs RESTful.",
       dataScience: "Développement Mobile",
       dataDesc:
         "Création d'applications mobiles cross-platform avec React Native & Expo, axées sur la performance et l'expérience utilisateur.",
@@ -148,12 +147,11 @@ export const translations = {
       dbDesc:
         "Conception et optimisation de systèmes de bases de données pour la performance, la scalabilité et l'intégrité des données.",
       devops: "DevOps & Administration serveur",
-      devopsDesc:
-        "Gestion d'infrastructure, pipelines CI/CD, conteneurisation et déploiements cloud.",
+      devopsDesc: "Pipelines CI/CD, conteneurisation.",
       personalDetails: "Détails personnels",
       name: "Nom",
       age: "Âge",
-      ageVal: "27 ans",
+      ageVal: "22 ans",
       location2: "Localisation",
       education: "Formation",
       eduVal: "Master en Data Science & IA",

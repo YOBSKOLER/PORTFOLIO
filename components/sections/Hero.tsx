@@ -23,12 +23,12 @@ const techIcons = [
     alt: "NestJS",
   },
   {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    alt: "TypeScript",
-  },
-  {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
     alt: "PostgreSQL",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    alt: "TypeScript",
   },
   {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
@@ -42,8 +42,8 @@ const techIcons = [
 
 const stats = [
   { value: "2+", labelKey: "yearsExp" },
-  { value: "10+", labelKey: "projects" },
-  { value: "5+", labelKey: "clients" },
+  { value: "5+", labelKey: "projects" },
+  // { value: "5+", labelKey: "clients" },
 ];
 
 export function Hero() {
@@ -70,6 +70,11 @@ export function Hero() {
               Available for work
             </div>
 
+            <div className="inline-flex items-center gap-2 bg-violet/10 border border-violet/30 rounded-full px-4 py-2 text-violet-light text-sm">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              AI Engeneering & Data Science Enthusiast
+            </div>
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
               {t.hero.greeting}{" "}
               <span className="text-violet-light">{t.hero.name}</span>
@@ -84,7 +89,7 @@ export function Hero() {
               className="flex items-center gap-2 text-violet-light hover:text-violet transition w-fit"
             >
               <Mail size={16} />
-              <span className="text-sm">hi@yobskoler.com</span>
+              <span className="text-sm">yobskoler9@gmail.com</span>
             </a>
 
             <div className="flex flex-wrap gap-4">
@@ -162,12 +167,12 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="absolute -bottom-4 -right-4 bg-navy-800 border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-2 shadow-xl"
+                className="absolute -bottom-4 -right-4 bg-navy-800  border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-2 shadow-xl"
               >
-                <MapPin size={16} className="text-violet-light" />
+                <MapPin size={20} className="text-violet-light  animate-bounce" />
                 <div>
-                  <div className="text-xs text-slate-400">{t.hero.basedIn}</div>
-                  <div className="text-sm font-semibold text-violet-light">
+                  <div className="text-xs text-slate-400 font-semibold">{t.hero.basedIn}</div>
+                  <div className="text-sm font-bold text-violet-light">
                     {t.hero.location}
                   </div>
                 </div>

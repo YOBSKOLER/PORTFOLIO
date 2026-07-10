@@ -3,10 +3,11 @@ import { useLang } from "@/components/providers/LanguageProvider";
 import { ParticlesBackground } from "@/components/ui/ParticlesBackground";
 import { motion } from "framer-motion";
 import { experienceData, educationData } from "@/lib/data";
-import { Briefcase, GraduationCap } from "lucide-react";
 
 type TimelineItem = {
   role?: string;
+  objective?: string;
+  objectiveBadgeClass?: string;
   degree?: string;
   company?: string;
   school?: string;
@@ -43,13 +44,18 @@ function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
             {item.role || item.degree}
           </h3>
           <span
+            className={`text-xs font-semibold px-3 py-1 rounded-full border shrink-0 ${item.objectiveBadgeClass}`}
+          >
+            {item.objective}
+          </span>
+          <span
             className={`text-xs font-semibold px-3 py-1 rounded-full border shrink-0 ${item.periodBadgeClass}`}
           >
             {item.period}
           </span>
         </div>
         <p className="text-violet-light text-sm font-medium mb-3">
-          {item.company || item.school} — {item.location}
+          {item.company || item.school} - {item.location}
         </p>
         <p className="text-slate-400 text-sm leading-relaxed mb-4">
           {item.description}
@@ -85,9 +91,6 @@ export function Experience() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Briefcase className="text-violet-light" size={28} />
-          </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             {t.experience.title}{" "}
             <span className="text-violet-light">
@@ -110,9 +113,6 @@ export function Experience() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <GraduationCap className="text-violet-light" size={28} />
-          </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             {t.experience.education}{" "}
             <span className="text-violet-light">
