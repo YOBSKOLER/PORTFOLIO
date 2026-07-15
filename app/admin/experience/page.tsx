@@ -29,19 +29,23 @@ function EntryForm({
   onCancel: () => void;
   type: "work" | "edu";
 }) {
-  const [form, setForm] = useState({
-    ...(type === "work"
-      ? { role: "", company: "" }
-      : { degree: "", school: "" }),
-    location: "",
-    period: "",
-    periodColor: "#7c3aed",
-    description: "",
-    tags: "",
-    ...initial,
-    tags: Array.isArray(initial?.tags)
+  const [form, setForm] = useState(() => {
+    const baseTags = Array.isArray(initial?.tags)
       ? initial.tags.join(", ")
-      : (initial?.tags ?? ""),
+      : (initial?.tags ?? "");
+
+    return {
+      ...(type === "work"
+        ? { role: "", company: "" }
+        : { degree: "", school: "" }),
+      location: "",
+      period: "",
+      periodColor: "#7c3aed",
+      description: "",
+      tags: "",
+      ...initial,
+      tags: baseTags, // ← écrase le spread proprement via initializer function
+    };
   });
 
   return (
