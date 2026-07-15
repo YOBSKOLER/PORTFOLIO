@@ -1,59 +1,89 @@
 "use client";
-import { useState } from "react";
-import { Plus, Pencil, Trash2, ExternalLink } from "lucide-react";
+import { useState, useRef } from "react";
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  ExternalLink,
+  Upload,
+  Image,
+} from "lucide-react";
 import { professionalProjects, personalProjects } from "@/lib/data";
 
+type Project = {
+  title: string;
+  category: string;
+  categoryColor: string;
+  bgColor: string;
+  description: string;
+  tags: string[];
+  link: string;
+  image?: string;
+};
+
 export default function AdminProjects() {
-  const [projects, setProjects] = useState([
-    ...professionalProjects,
-    ...personalProjects,
+  const [projects, setProjects] = useState<Project[]>([
+    ...professionalProjects.map((p) => ({ ...p, image: "" })),
+    ...personalProjects.map((p) => ({ ...p, image: "" })),
   ]);
   const [showForm, setShowForm] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
-  const [form, setForm] = useState({
+  const [editing, setEditing] = useState<number | null>(null);
+  const [form, setForm] = useState<Project>({
     title: "",
     category: "",
-    description: "",
-    tags: "",
-    link: "",
-    bgColor: "from-violet-600 to-purple-800",
     categoryColor: "#7c3aed",
+    bgColor: "from-violet-600 to-purple-800",
+    description: "",
+    tags: [] as any,
+    link: "",
+    image: "",
   });
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () =>
+      setForm((f) => ({ ...f, image: reader.result as string }));
+    reader.readAsDataURL(file);
+  };
 
   const save = () => {
-    if (editing !== null) {
-      setProjects((p) =>
-        p.map((proj, i) =>
-          i === editing
-            ? { ...form, tags: form.tags.split(",").map((t) => t.trim()) }
-            : proj,
-        ),
-      );
-    } else {
-      setProjects((p) => [
-        ...p,
-        { ...form, tags: form.tags.split(",").map((t) => t.trim()) },
-      ]);
-    }
+    const data = {
+      ...form,
+      tags:
+        typeof form.tags === "string"
+          ? (form.tags as string)
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : form.tags,
+    };
+    if (editing !== null)
+      setProjects((p) => p.map((proj, i) => (i === editing ? data : proj)));
+    else setProjects((p) => [...p, data]);
     setShowForm(false);
     setEditing(null);
     setForm({
       title: "",
       category: "",
-      description: "",
-      tags: "",
-      link: "",
-      bgColor: "from-violet-600 to-purple-800",
       categoryColor: "#7c3aed",
+      bgColor: "from-violet-600 to-purple-800",
+      description: "",
+      tags: [] as any,
+      link: "",
+      image: "",
     });
   };
 
-  const del = (i: number) =>
-    setProjects((p) => p.filter((_, idx) => idx !== i));
-
   const edit = (i: number) => {
-    const p = projects[i];
-    setForm({ ...p, tags: Array.isArray(p.tags) ? p.tags.join(", ") : p.tags });
+    setForm({
+      ...projects[i],
+      tags: Array.isArray(projects[i].tags)
+        ? (projects[i].tags as string[]).join(", ")
+        : projects[i].tags,
+    });
     setEditing(i);
     setShowForm(true);
   };
@@ -73,17 +103,50 @@ export default function AdminProjects() {
         </button>
       </div>
 
-      {/* Form */}
       {showForm && (
         <div className="bg-[#111827] border border-slate-700 rounded-2xl p-6 space-y-4">
           <h2 className="font-bold text-lg">
             {editing !== null ? "Modifier" : "Nouveau"} projet
           </h2>
+
+          {/* Image upload */}
+          <div>
+            <label className="text-sm text-slate-400 mb-2 block">
+              Image du projet
+            </label>
+            <div
+              onClick={() => fileRef.current?.click()}
+              className="border-2 border-dashed border-slate-600 hover:border-violet-500 rounded-xl p-6 cursor-pointer transition flex flex-col items-center gap-3"
+            >
+              {form.image ? (
+                <img
+                  src={form.image}
+                  alt="preview"
+                  className="w-full max-h-40 object-cover rounded-lg"
+                />
+              ) : (
+                <>
+                  <Upload size={28} className="text-slate-500" />
+                  <p className="text-slate-500 text-sm">
+                    Clique pour uploader une image
+                  </p>
+                </>
+              )}
+            </div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImage}
+              className="hidden"
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { key: "title", label: "Titre" },
               { key: "category", label: "Catégorie" },
-              { key: "link", label: "Lien" },
+              { key: "link", label: "Lien du projet" },
               { key: "tags", label: "Tags (séparés par virgule)" },
             ].map(({ key, label }) => (
               <div key={key}>
@@ -91,13 +154,32 @@ export default function AdminProjects() {
                   {label}
                 </label>
                 <input
-                  value={form[key as keyof typeof form]}
+                  value={(form as any)[key]}
                   onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                   className="w-full bg-[#0a0e1a] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
                 />
               </div>
             ))}
+            <div>
+              <label className="text-sm text-slate-400 mb-1 block">
+                Couleur catégorie
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={form.categoryColor}
+                  onChange={(e) =>
+                    setForm({ ...form, categoryColor: e.target.value })
+                  }
+                  className="w-10 h-10 rounded cursor-pointer border-0 bg-transparent"
+                />
+                <span className="text-slate-400 text-sm">
+                  {form.categoryColor}
+                </span>
+              </div>
+            </div>
           </div>
+
           <div>
             <label className="text-sm text-slate-400 mb-1 block">
               Description
@@ -111,6 +193,7 @@ export default function AdminProjects() {
               className="w-full bg-[#0a0e1a] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500 resize-none"
             />
           </div>
+
           <div className="flex gap-3">
             <button
               onClick={save}
@@ -128,61 +211,80 @@ export default function AdminProjects() {
         </div>
       )}
 
-      {/* List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((p, i) => (
           <div
             key={i}
-            className="bg-[#111827] border border-slate-800 rounded-2xl p-5 space-y-3"
+            className="bg-[#111827] border border-slate-800 rounded-2xl overflow-hidden"
           >
-            <div className="flex items-start justify-between gap-2">
-              <h3 className="font-bold text-white">{p.title}</h3>
-              <span
-                className="text-xs px-2 py-1 rounded-full shrink-0"
-                style={{
-                  color: p.categoryColor,
-                  background: p.categoryColor + "20",
-                }}
-              >
-                {p.category}
-              </span>
-            </div>
-            <p className="text-slate-400 text-sm line-clamp-2">
-              {p.description}
-            </p>
-            <div className="flex flex-wrap gap-1">
-              {(Array.isArray(p.tags) ? p.tags : []).map((t: string) => (
-                <span
-                  key={t}
-                  className="text-xs px-2 py-0.5 bg-slate-800 rounded text-slate-400"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-            <div className="flex gap-2 pt-1">
-              <button
-                onClick={() => edit(i)}
-                className="flex items-center gap-1 text-xs text-violet-400 hover:text-violet-300 transition"
-              >
-                <Pencil size={13} /> Modifier
-              </button>
-              <button
-                onClick={() => del(i)}
-                className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300 transition"
-              >
-                <Trash2 size={13} /> Supprimer
-              </button>
-              {p.link && p.link !== "#" && (
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition ml-auto"
-                >
-                  <ExternalLink size={13} /> Voir
-                </a>
+            {/* Image ou gradient */}
+            <div
+              className={`h-36 ${p.image ? "" : `bg-gradient-to-br ${p.bgColor}`} relative`}
+            >
+              {p.image ? (
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Image size={36} className="text-white/40" />
+                </div>
               )}
+            </div>
+            <div className="p-4 space-y-2">
+              <div className="flex items-start justify-between gap-2">
+                <h3 className="font-bold text-white">{p.title}</h3>
+                <span
+                  className="text-xs px-2 py-0.5 rounded-full shrink-0"
+                  style={{
+                    color: p.categoryColor,
+                    background: p.categoryColor + "20",
+                  }}
+                >
+                  {p.category}
+                </span>
+              </div>
+              <p className="text-slate-400 text-xs line-clamp-2">
+                {p.description}
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {p.tags?.map((t: string) => (
+                  <span
+                    key={t}
+                    className="text-xs px-2 py-0.5 bg-slate-800 rounded text-slate-400"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-3 pt-1">
+                <button
+                  onClick={() => edit(i)}
+                  className="flex items-center gap-1 text-xs text-violet-400 hover:text-violet-300 transition"
+                >
+                  <Pencil size={12} /> Modifier
+                </button>
+                <button
+                  onClick={() =>
+                    setProjects((p) => p.filter((_, idx) => idx !== i))
+                  }
+                  className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300 transition"
+                >
+                  <Trash2 size={12} /> Supprimer
+                </button>
+                {p.link && p.link !== "#" && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition ml-auto"
+                  >
+                    <ExternalLink size={12} /> Voir
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}

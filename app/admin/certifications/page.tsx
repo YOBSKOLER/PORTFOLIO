@@ -1,10 +1,12 @@
 "use client";
-import { useState } from "react";
-import { Plus, Pencil, Trash2, Award } from "lucide-react";
+import { useState, useRef } from "react";
+import { Plus, Pencil, Trash2, Award, Upload } from "lucide-react";
 import { certifications as initCerts } from "@/lib/data";
 
 export default function AdminCertifications() {
-  const [certs, setCerts] = useState(initCerts);
+  const [certs, setCerts] = useState(
+    initCerts.map((c) => ({ ...c, image: "" })),
+  );
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<number | null>(null);
   const [form, setForm] = useState({
@@ -14,14 +16,27 @@ export default function AdminCertifications() {
     link: "",
     color: "#7c3aed",
     logo: "",
+    image: "",
   });
+  const fileRef = useRef<HTMLInputElement>(null);
+  const logoRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: "image" | "logo",
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () =>
+      setForm((f) => ({ ...f, [field]: reader.result as string }));
+    reader.readAsDataURL(file);
+  };
 
   const save = () => {
-    if (editing !== null) {
+    if (editing !== null)
       setCerts((c) => c.map((cert, i) => (i === editing ? form : cert)));
-    } else {
-      setCerts((c) => [...c, form]);
-    }
+    else setCerts((c) => [...c, form]);
     setShowForm(false);
     setEditing(null);
     setForm({
@@ -31,6 +46,7 @@ export default function AdminCertifications() {
       link: "",
       color: "#7c3aed",
       logo: "",
+      image: "",
     });
   };
 
@@ -54,27 +70,107 @@ export default function AdminCertifications() {
           <h2 className="font-bold text-lg">
             {editing !== null ? "Modifier" : "Nouvelle"} certification
           </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Image certification */}
+            <div>
+              <label className="text-sm text-slate-400 mb-2 block">
+                Image de la certification
+              </label>
+              <div
+                onClick={() => fileRef.current?.click()}
+                className="border-2 border-dashed border-slate-600 hover:border-violet-500 rounded-xl p-4 cursor-pointer transition flex flex-col items-center gap-2 h-28 justify-center"
+              >
+                {form.image ? (
+                  <img
+                    src={form.image}
+                    alt="preview"
+                    className="h-full object-contain rounded"
+                  />
+                ) : (
+                  <>
+                    <Upload size={22} className="text-slate-500" />
+                    <p className="text-slate-500 text-xs">
+                      Image du certificat
+                    </p>
+                  </>
+                )}
+              </div>
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFile(e, "image")}
+                className="hidden"
+              />
+            </div>
+
+            {/* Logo organisme */}
+            <div>
+              <label className="text-sm text-slate-400 mb-2 block">
+                Logo de l'organisme
+              </label>
+              <div
+                onClick={() => logoRef.current?.click()}
+                className="border-2 border-dashed border-slate-600 hover:border-violet-500 rounded-xl p-4 cursor-pointer transition flex flex-col items-center gap-2 h-28 justify-center"
+              >
+                {form.logo ? (
+                  <img
+                    src={form.logo}
+                    alt="logo"
+                    className="h-full object-contain rounded"
+                  />
+                ) : (
+                  <>
+                    <Upload size={22} className="text-slate-500" />
+                    <p className="text-slate-500 text-xs">Logo organisme</p>
+                  </>
+                )}
+              </div>
+              <input
+                ref={logoRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFile(e, "logo")}
+                className="hidden"
+              />
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { key: "title", label: "Titre" },
-              { key: "issuer", label: "Organisme" },
-              { key: "date", label: "Date" },
-              { key: "link", label: "Lien" },
-              { key: "logo", label: "URL Logo" },
-              { key: "color", label: "Couleur (hex)" },
+              { key: "title", label: "Titre de la certification" },
+              { key: "issuer", label: "Organisme (ex: Google, AWS)" },
+              { key: "date", label: "Date obtention" },
+              { key: "link", label: "Lien de vérification" },
             ].map(({ key, label }) => (
               <div key={key}>
                 <label className="text-sm text-slate-400 mb-1 block">
                   {label}
                 </label>
                 <input
-                  value={form[key as keyof typeof form]}
+                  value={(form as any)[key]}
                   onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                   className="w-full bg-[#0a0e1a] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
                 />
               </div>
             ))}
+            <div>
+              <label className="text-sm text-slate-400 mb-1 block">
+                Couleur
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={form.color}
+                  onChange={(e) => setForm({ ...form, color: e.target.value })}
+                  className="w-10 h-10 rounded cursor-pointer border-0 bg-transparent"
+                />
+                <span className="text-slate-400 text-sm">{form.color}</span>
+              </div>
+            </div>
           </div>
+
           <div className="flex gap-3">
             <button
               onClick={save}
@@ -96,52 +192,59 @@ export default function AdminCertifications() {
         {certs.map((cert, i) => (
           <div
             key={i}
-            className="bg-[#111827] border border-slate-800 rounded-2xl p-5 flex items-start gap-4"
+            className="bg-[#111827] border border-slate-800 rounded-2xl overflow-hidden"
           >
-            <div
-              className="p-3 rounded-xl shrink-0"
-              style={{ background: cert.color + "20" }}
-            >
-              {cert.logo ? (
-                <img
-                  src={cert.logo}
-                  alt={cert.issuer}
-                  className="w-8 h-8 object-contain"
-                />
-              ) : (
-                <Award size={24} style={{ color: cert.color }} />
-              )}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p
-                className="text-xs font-medium mb-1"
-                style={{ color: cert.color }}
+            {cert.image && (
+              <img
+                src={cert.image}
+                alt={cert.title}
+                className="w-full h-36 object-cover"
+              />
+            )}
+            <div className="p-5 flex items-start gap-3">
+              <div
+                className="p-2 rounded-xl shrink-0"
+                style={{ background: cert.color + "20" }}
               >
-                {cert.issuer}
-              </p>
-              <h3 className="font-bold text-sm text-white truncate">
-                {cert.title}
-              </h3>
-              <p className="text-slate-500 text-xs mt-1">{cert.date}</p>
-              <div className="flex gap-3 mt-3">
-                <button
-                  onClick={() => {
-                    setForm(cert as any);
-                    setEditing(i);
-                    setShowForm(true);
-                  }}
-                  className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1 transition"
+                {cert.logo ? (
+                  <img
+                    src={cert.logo}
+                    alt={cert.issuer}
+                    className="w-8 h-8 object-contain"
+                  />
+                ) : (
+                  <Award size={22} style={{ color: cert.color }} />
+                )}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p
+                  className="text-xs font-medium mb-1"
+                  style={{ color: cert.color }}
                 >
-                  <Pencil size={12} /> Modifier
-                </button>
-                <button
-                  onClick={() =>
-                    setCerts((c) => c.filter((_, idx) => idx !== i))
-                  }
-                  className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition"
-                >
-                  <Trash2 size={12} /> Supprimer
-                </button>
+                  {cert.issuer}
+                </p>
+                <h3 className="font-bold text-sm text-white">{cert.title}</h3>
+                <p className="text-slate-500 text-xs mt-1">{cert.date}</p>
+                <div className="flex gap-3 mt-3">
+                  <button
+                    onClick={() => {
+                      setForm(cert);
+                      setEditing(i);
+                      setShowForm(true);
+                    }}
+                    className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1 transition"
+                  >
+                    <Pencil size={12} /> Modifier
+                  </button>
+                  <button
+                    onClick={() =>
+                      setCerts((c) => c.filter((_, idx) => idx !== i))
+                    }
+                    className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition"
+                  >
+                    <Trash2 size={12} /> Supprimer
+                  </button>
+                </div>
               </div>
             </div>
           </div>
