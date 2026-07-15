@@ -11,58 +11,51 @@ type Category = {
   skills: Skill[];
 };
 
+const emptySkill: Skill = { name: "", icon: "", unlocked: true };
+
 export default function AdminSkills() {
   const [categories, setCategories] = useState<Category[]>(
-    initSkills as Category[],
+    initSkills.map((c) => ({
+      ...c,
+      skills: c.skills.map((s) => ({
+        name: s.name,
+        icon: s.icon,
+        unlocked: s.unlocked,
+      })),
+    })),
   );
   const [selectedCat, setSelectedCat] = useState(0);
   const [showSkillForm, setShowSkillForm] = useState(false);
   const [editingSkill, setEditingSkill] = useState<number | null>(null);
-  const [skillForm, setSkillForm] = useState({
-    name: "",
-    icon: "",
-    unlocked: true,
-  });
+  const [skillForm, setSkillForm] = useState<Skill>(emptySkill);
 
   const cat = categories[selectedCat];
 
-  const saveSkill = () => {
+  const updateCatSkills = (skills: Skill[]) => {
     setCategories((cats) =>
-      cats.map((c, i) => {
-        if (i !== selectedCat) return c;
-        const skills =
-          editingSkill !== null
-            ? c.skills.map((s, si) => (si === editingSkill ? skillForm : s))
-            : [...c.skills, skillForm];
-        return { ...c, skills };
-      }),
+      cats.map((c, i) => (i === selectedCat ? { ...c, skills } : c)),
     );
+  };
+
+  const saveSkill = () => {
+    const updated =
+      editingSkill !== null
+        ? cat.skills.map((s, i) => (i === editingSkill ? skillForm : s))
+        : [...cat.skills, skillForm];
+    updateCatSkills(updated);
     setShowSkillForm(false);
     setEditingSkill(null);
-    setSkillForm({ name: "", icon: "", unlocked: true });
+    setSkillForm(emptySkill);
   };
 
   const deleteSkill = (si: number) => {
-    setCategories((cats) =>
-      cats.map((c, i) =>
-        i !== selectedCat
-          ? c
-          : { ...c, skills: c.skills.filter((_, idx) => idx !== si) },
-      ),
-    );
+    updateCatSkills(cat.skills.filter((_, i) => i !== si));
   };
 
   const toggleUnlock = (si: number) => {
-    setCategories((cats) =>
-      cats.map((c, i) =>
-        i !== selectedCat
-          ? c
-          : {
-              ...c,
-              skills: c.skills.map((s, idx) =>
-                idx === si ? { ...s, unlocked: !s.unlocked } : s,
-              ),
-            },
+    updateCatSkills(
+      cat.skills.map((s, i) =>
+        i === si ? { ...s, unlocked: !s.unlocked } : s,
       ),
     );
   };
@@ -99,7 +92,6 @@ export default function AdminSkills() {
         ))}
       </div>
 
-      {/* Skills list */}
       <div className="bg-[#111827] border border-slate-800 rounded-2xl p-6 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-lg" style={{ color: cat.color }}>
@@ -109,6 +101,7 @@ export default function AdminSkills() {
             onClick={() => {
               setShowSkillForm(true);
               setEditingSkill(null);
+              setSkillForm(emptySkill);
             }}
             className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 px-3 py-2 rounded-xl text-sm font-medium transition"
           >
@@ -116,7 +109,6 @@ export default function AdminSkills() {
           </button>
         </div>
 
-        {/* Skill form */}
         {showSkillForm && (
           <div className="bg-[#0a0e1a] border border-slate-700 rounded-xl p-4 space-y-3">
             <h3 className="font-semibold">
@@ -148,7 +140,6 @@ export default function AdminSkills() {
               </div>
             </div>
 
-            {/* Preview icon */}
             {skillForm.icon && (
               <div className="flex items-center gap-2">
                 <img
@@ -166,7 +157,11 @@ export default function AdminSkills() {
                 onClick={() =>
                   setSkillForm({ ...skillForm, unlocked: !skillForm.unlocked })
                 }
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition ${skillForm.unlocked ? "bg-green-500/20 text-green-400 border border-green-500/40" : "bg-slate-700 text-slate-400 border border-slate-600"}`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition border ${
+                  skillForm.unlocked
+                    ? "bg-green-500/20 text-green-400 border-green-500/40"
+                    : "bg-slate-700 text-slate-400 border-slate-600"
+                }`}
               >
                 {skillForm.unlocked ? (
                   <>
@@ -200,12 +195,15 @@ export default function AdminSkills() {
           </div>
         )}
 
-        {/* Skills grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {cat.skills.map((skill, si) => (
             <div
               key={si}
-              className={`flex items-center gap-3 p-3 rounded-xl border transition ${skill.unlocked ? "border-slate-700 bg-slate-800/30" : "border-slate-700/30 bg-slate-800/10 opacity-60"}`}
+              className={`flex items-center gap-3 p-3 rounded-xl border transition ${
+                skill.unlocked
+                  ? "border-slate-700 bg-slate-800/30"
+                  : "border-slate-700/30 bg-slate-800/10 opacity-60"
+              }`}
             >
               <img
                 src={skill.icon}
@@ -223,7 +221,6 @@ export default function AdminSkills() {
               <div className="flex items-center gap-1 shrink-0">
                 <button
                   onClick={() => toggleUnlock(si)}
-                  title={skill.unlocked ? "Verrouiller" : "Déverrouiller"}
                   className="p-1.5 rounded-lg hover:bg-slate-700 transition text-slate-400 hover:text-white"
                 >
                   {skill.unlocked ? <Unlock size={13} /> : <Lock size={13} />}

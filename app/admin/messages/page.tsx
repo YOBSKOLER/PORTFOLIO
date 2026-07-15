@@ -2,7 +2,16 @@
 import { useState } from "react";
 import { Trash2, Mail } from "lucide-react";
 
-const mockMessages = [
+type Message = {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  date: string;
+  read: boolean;
+};
+
+const mockMessages: Message[] = [
   {
     id: 1,
     name: "John Doe",
@@ -22,8 +31,8 @@ const mockMessages = [
 ];
 
 export default function AdminMessages() {
-  const [messages, setMessages] = useState(mockMessages);
-  const [selected, setSelected] = useState<any>(null);
+  const [messages, setMessages] = useState<Message[]>(mockMessages);
+  const [selected, setSelected] = useState<Message | null>(null);
 
   const del = (id: number) => {
     setMessages((m) => m.filter((msg) => msg.id !== id));
@@ -44,7 +53,6 @@ export default function AdminMessages() {
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* List */}
         <div className="space-y-3">
           {messages.length === 0 && (
             <div className="text-center text-slate-500 py-12">
@@ -83,7 +91,6 @@ export default function AdminMessages() {
           ))}
         </div>
 
-        {/* Detail */}
         {selected ? (
           <div className="bg-[#111827] border border-slate-800 rounded-xl p-6 space-y-4">
             <div className="flex items-center justify-between">

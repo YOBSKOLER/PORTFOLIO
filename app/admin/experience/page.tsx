@@ -6,32 +6,66 @@ import {
   educationData as initEdu,
 } from "@/lib/data";
 
-function buildForm(type: "work" | "edu", initial: any) {
-  const baseTags = Array.isArray(initial?.tags)
-    ? initial.tags.join(", ")
-    : (initial?.tags ?? "");
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-  const base = {
-    location: initial?.location ?? "",
-    period: initial?.period ?? "",
-    periodColor: initial?.periodColor ?? "#7c3aed",
-    description: initial?.description ?? "",
-    tags: baseTags,
+type BaseForm = {
+  location: string;
+  period: string;
+  periodColor: string;
+  description: string;
+  tags: string;
+};
+
+type WorkForm = BaseForm & { role: string; company: string };
+type EduForm = BaseForm & { degree: string; school: string };
+type AnyForm = WorkForm | EduForm;
+
+type EntryData = {
+  role?: string;
+  degree?: string;
+  company?: string;
+  school?: string;
+  location?: string;
+  period?: string;
+  periodColor?: string;
+  description?: string;
+  tags?: string[] | string;
+};
+
+// ─── Helper ───────────────────────────────────────────────────────────────────
+
+function buildForm(type: "work" | "edu", initial: EntryData): AnyForm {
+  const tags = Array.isArray(initial.tags)
+    ? initial.tags.join(", ")
+    : (initial.tags ?? "");
+
+  const base: BaseForm = {
+    location: initial.location ?? "",
+    period: initial.period ?? "",
+    periodColor: initial.periodColor ?? "#7c3aed",
+    description: initial.description ?? "",
+    tags,
   };
 
   if (type === "work") {
     return {
-      role: initial?.role ?? "",
-      company: initial?.company ?? "",
+      role: initial.role ?? "",
+      company: initial.company ?? "",
       ...base,
     };
   }
   return {
-    degree: initial?.degree ?? "",
-    school: initial?.school ?? "",
+    degree: initial.degree ?? "",
+    school: initial.school ?? "",
     ...base,
   };
 }
+
+function isWork(form: AnyForm): form is WorkForm {
+  return "role" in form;
+}
+
+// ─── EntryForm ────────────────────────────────────────────────────────────────
 
 function EntryForm({
   initial,
@@ -39,25 +73,33 @@ function EntryForm({
   onCancel,
   type,
 }: {
-  initial: any;
-  onSave: (d: any) => void;
+  initial: EntryData;
+  onSave: (d: EntryData & { tags: string[] }) => void;
   onCancel: () => void;
   type: "work" | "edu";
 }) {
-  const [form, setForm] = useState(() => buildForm(type, initial));
+  const [form, setForm] = useState<AnyForm>(() => buildForm(type, initial));
+
+  const handleSave = () => {
+    onSave({
+      ...form,
+      tags: form.tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean),
+    });
+  };
 
   return (
     <div className="bg-[#0a0e1a] border border-slate-700 rounded-xl p-5 space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {type === "work" ? (
+        {isWork(form) ? (
           <>
             <div>
               <label className="text-xs text-slate-400 mb-1 block">Poste</label>
               <input
-                value={(form as any).role ?? ""}
-                onChange={(e) =>
-                  setForm({ ...form, role: e.target.value } as any)
-                }
+                value={form.role}
+                onChange={(e) => setForm({ ...form, role: e.target.value })}
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
@@ -66,10 +108,8 @@ function EntryForm({
                 Entreprise
               </label>
               <input
-                value={(form as any).company ?? ""}
-                onChange={(e) =>
-                  setForm({ ...form, company: e.target.value } as any)
-                }
+                value={form.company}
+                onChange={(e) => setForm({ ...form, company: e.target.value })}
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
@@ -81,9 +121,9 @@ function EntryForm({
                 Diplôme
               </label>
               <input
-                value={(form as any).degree ?? ""}
+                value={(form as EduForm).degree}
                 onChange={(e) =>
-                  setForm({ ...form, degree: e.target.value } as any)
+                  setForm({ ...form, degree: e.target.value } as EduForm)
                 }
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
@@ -91,15 +131,16 @@ function EntryForm({
             <div>
               <label className="text-xs text-slate-400 mb-1 block">École</label>
               <input
-                value={(form as any).school ?? ""}
+                value={(form as EduForm).school}
                 onChange={(e) =>
-                  setForm({ ...form, school: e.target.value } as any)
+                  setForm({ ...form, school: e.target.value } as EduForm)
                 }
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
           </>
         )}
+
         <div>
           <label className="text-xs text-slate-400 mb-1 block">
             Localisation
@@ -110,6 +151,7 @@ function EntryForm({
             className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
           />
         </div>
+
         <div>
           <label className="text-xs text-slate-400 mb-1 block">Période</label>
           <input
@@ -119,6 +161,7 @@ function EntryForm({
             className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
           />
         </div>
+
         <div>
           <label className="text-xs text-slate-400 mb-1 block">
             Couleur badge
@@ -135,6 +178,7 @@ function EntryForm({
             <span className="text-slate-400 text-sm">{form.periodColor}</span>
           </div>
         </div>
+
         <div>
           <label className="text-xs text-slate-400 mb-1 block">
             Tags (séparés par virgule)
@@ -147,6 +191,7 @@ function EntryForm({
           />
         </div>
       </div>
+
       <div>
         <label className="text-xs text-slate-400 mb-1 block">Description</label>
         <textarea
@@ -156,17 +201,10 @@ function EntryForm({
           className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500 resize-none"
         />
       </div>
+
       <div className="flex gap-2">
         <button
-          onClick={() =>
-            onSave({
-              ...form,
-              tags: form.tags
-                .split(",")
-                .map((t: string) => t.trim())
-                .filter(Boolean),
-            })
-          }
+          onClick={handleSave}
           className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-xl text-sm font-medium transition"
         >
           Sauvegarder
@@ -182,12 +220,26 @@ function EntryForm({
   );
 }
 
+// ─── EntryCard ────────────────────────────────────────────────────────────────
+
+type CardEntry = {
+  role?: string;
+  degree?: string;
+  company?: string;
+  school?: string;
+  location: string;
+  period: string;
+  periodColor: string;
+  description: string;
+  tags: string[];
+};
+
 function EntryCard({
   entry,
   onEdit,
   onDelete,
 }: {
-  entry: any;
+  entry: CardEntry;
   onEdit: () => void;
   onDelete: () => void;
   type: "work" | "edu";
@@ -196,9 +248,9 @@ function EntryCard({
     <div className="bg-[#0a0e1a] border border-slate-800 rounded-xl p-5 space-y-3">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="font-bold text-white">{entry.role || entry.degree}</h3>
+          <h3 className="font-bold text-white">{entry.role ?? entry.degree}</h3>
           <p className="text-sm" style={{ color: entry.periodColor }}>
-            {entry.company || entry.school} — {entry.location}
+            {entry.company ?? entry.school} — {entry.location}
           </p>
         </div>
         <span
@@ -212,9 +264,11 @@ function EntryCard({
           {entry.period}
         </span>
       </div>
+
       <p className="text-slate-400 text-sm line-clamp-2">{entry.description}</p>
+
       <div className="flex flex-wrap gap-1">
-        {entry.tags?.map((t: string) => (
+        {entry.tags.map((t) => (
           <span
             key={t}
             className="text-xs px-2 py-0.5 bg-slate-800 rounded text-slate-400"
@@ -223,6 +277,7 @@ function EntryCard({
           </span>
         ))}
       </div>
+
       <div className="flex gap-3 pt-1">
         <button
           onClick={onEdit}
@@ -241,37 +296,68 @@ function EntryCard({
   );
 }
 
+// ─── Page principale ──────────────────────────────────────────────────────────
+
+type SavedEntry = CardEntry;
+
 export default function AdminExperience() {
-  const [experiences, setExperiences] = useState(initExp);
-  const [education, setEducation] = useState(initEdu);
+  const [experiences, setExperiences] = useState<SavedEntry[]>(
+    initExp.map((e) => ({ ...e, tags: e.tags ?? [] })),
+  );
+  const [education, setEducation] = useState<SavedEntry[]>(
+    initEdu.map((e) => ({ ...e, tags: e.tags ?? [] })),
+  );
   const [showExpForm, setShowExpForm] = useState(false);
   const [showEduForm, setShowEduForm] = useState(false);
   const [editingExp, setEditingExp] = useState<number | null>(null);
   const [editingEdu, setEditingEdu] = useState<number | null>(null);
 
-  const saveExp = (data: any) => {
-    if (editingExp !== null)
-      setExperiences((e) => e.map((x, i) => (i === editingExp ? data : x)));
-    else setExperiences((e) => [...e, data]);
+  const saveExp = (data: EntryData & { tags: string[] }) => {
+    const entry: SavedEntry = {
+      role: data.role,
+      company: data.company,
+      location: data.location ?? "",
+      period: data.period ?? "",
+      periodColor: data.periodColor ?? "#7c3aed",
+      description: data.description ?? "",
+      tags: data.tags,
+    };
+    if (editingExp !== null) {
+      setExperiences((e) => e.map((x, i) => (i === editingExp ? entry : x)));
+    } else {
+      setExperiences((e) => [...e, entry]);
+    }
     setShowExpForm(false);
     setEditingExp(null);
   };
 
-  const saveEdu = (data: any) => {
-    if (editingEdu !== null)
-      setEducation((e) => e.map((x, i) => (i === editingEdu ? data : x)));
-    else setEducation((e) => [...e, data]);
+  const saveEdu = (data: EntryData & { tags: string[] }) => {
+    const entry: SavedEntry = {
+      degree: data.degree,
+      school: data.school,
+      location: data.location ?? "",
+      period: data.period ?? "",
+      periodColor: data.periodColor ?? "#7c3aed",
+      description: data.description ?? "",
+      tags: data.tags,
+    };
+    if (editingEdu !== null) {
+      setEducation((e) => e.map((x, i) => (i === editingEdu ? entry : x)));
+    } else {
+      setEducation((e) => [...e, entry]);
+    }
     setShowEduForm(false);
     setEditingEdu(null);
   };
 
   return (
     <div className="p-6 text-white space-y-10">
+      {/* Expériences */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <Briefcase className="text-violet-400" size={22} /> Expériences
-            professionnelles
+            <Briefcase className="text-violet-400" size={22} />
+            Expériences professionnelles
           </h1>
           <button
             onClick={() => {
@@ -283,6 +369,7 @@ export default function AdminExperience() {
             <Plus size={15} /> Ajouter
           </button>
         </div>
+
         {showExpForm && (
           <EntryForm
             type="work"
@@ -294,6 +381,7 @@ export default function AdminExperience() {
             }}
           />
         )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {experiences.map((exp, i) => (
             <EntryCard
@@ -314,11 +402,12 @@ export default function AdminExperience() {
 
       <div className="border-t border-slate-800" />
 
+      {/* Formation */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold flex items-center gap-2">
-            <GraduationCap className="text-cyan-400" size={22} /> Formation &
-            Diplômes
+            <GraduationCap className="text-cyan-400" size={22} />
+            Formation & Diplômes
           </h2>
           <button
             onClick={() => {
@@ -330,6 +419,7 @@ export default function AdminExperience() {
             <Plus size={15} /> Ajouter
           </button>
         </div>
+
         {showEduForm && (
           <EntryForm
             type="edu"
@@ -341,6 +431,7 @@ export default function AdminExperience() {
             }}
           />
         )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {education.map((edu, i) => (
             <EntryCard

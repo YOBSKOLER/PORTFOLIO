@@ -1,89 +1,68 @@
 "use client";
 import { useState, useRef } from "react";
-import {
-  Plus,
-  Pencil,
-  Trash2,
-  ExternalLink,
-  Upload,
-  Image,
-} from "lucide-react";
-import { professionalProjects, personalProjects } from "@/lib/data";
+import { Plus, Pencil, Trash2, Award, Upload } from "lucide-react";
+import { certifications as initCerts } from "@/lib/data";
 
-type Project = {
+type Cert = {
   title: string;
-  category: string;
-  categoryColor: string;
-  bgColor: string;
-  description: string;
-  tags: string[];
+  issuer: string;
+  date: string;
   link: string;
-  image?: string;
+  color: string;
+  logo: string;
+  image: string;
 };
 
-export default function AdminProjects() {
-  const [projects, setProjects] = useState<Project[]>([
-    ...professionalProjects.map((p) => ({ ...p, image: "" })),
-    ...personalProjects.map((p) => ({ ...p, image: "" })),
-  ]);
+const emptyCert: Cert = {
+  title: "",
+  issuer: "",
+  date: "",
+  link: "",
+  color: "#7c3aed",
+  logo: "",
+  image: "",
+};
+
+export default function AdminCertifications() {
+  const [certs, setCerts] = useState<Cert[]>(
+    initCerts.map((c) => ({
+      ...c,
+      image: "",
+      logo: c.logo ?? "",
+      link: c.link ?? "",
+    })),
+  );
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<number | null>(null);
-  const [form, setForm] = useState<Project>({
-    title: "",
-    category: "",
-    categoryColor: "#7c3aed",
-    bgColor: "from-violet-600 to-purple-800",
-    description: "",
-    tags: [] as any,
-    link: "",
-    image: "",
-  });
+  const [form, setForm] = useState<Cert>(emptyCert);
   const fileRef = useRef<HTMLInputElement>(null);
+  const logoRef = useRef<HTMLInputElement>(null);
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFile = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: "image" | "logo",
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () =>
-      setForm((f) => ({ ...f, image: reader.result as string }));
+      setForm((f) => ({ ...f, [field]: reader.result as string }));
     reader.readAsDataURL(file);
   };
 
   const save = () => {
-    const data = {
-      ...form,
-      tags:
-        typeof form.tags === "string"
-          ? (form.tags as string)
-              .split(",")
-              .map((t) => t.trim())
-              .filter(Boolean)
-          : form.tags,
-    };
-    if (editing !== null)
-      setProjects((p) => p.map((proj, i) => (i === editing ? data : proj)));
-    else setProjects((p) => [...p, data]);
+    if (editing !== null) {
+      setCerts((c) => c.map((cert, i) => (i === editing ? form : cert)));
+    } else {
+      setCerts((c) => [...c, form]);
+    }
     setShowForm(false);
     setEditing(null);
-    setForm({
-      title: "",
-      category: "",
-      categoryColor: "#7c3aed",
-      bgColor: "from-violet-600 to-purple-800",
-      description: "",
-      tags: [] as any,
-      link: "",
-      image: "",
-    });
+    setForm(emptyCert);
   };
 
   const edit = (i: number) => {
-    setForm({
-      ...projects[i],
-      tags: Array.isArray(projects[i].tags)
-        ? (projects[i].tags as string[]).join(", ")
-        : projects[i].tags,
-    });
+    setForm(certs[i]);
     setEditing(i);
     setShowForm(true);
   };
@@ -91,11 +70,12 @@ export default function AdminProjects() {
   return (
     <div className="p-6 text-white space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Projets</h1>
+        <h1 className="text-2xl font-bold">Certifications</h1>
         <button
           onClick={() => {
             setShowForm(true);
             setEditing(null);
+            setForm(emptyCert);
           }}
           className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-xl text-sm font-medium transition"
         >
@@ -106,55 +86,87 @@ export default function AdminProjects() {
       {showForm && (
         <div className="bg-[#111827] border border-slate-700 rounded-2xl p-6 space-y-4">
           <h2 className="font-bold text-lg">
-            {editing !== null ? "Modifier" : "Nouveau"} projet
+            {editing !== null ? "Modifier" : "Nouvelle"} certification
           </h2>
 
-          {/* Image upload */}
-          <div>
-            <label className="text-sm text-slate-400 mb-2 block">
-              Image du projet
-            </label>
-            <div
-              onClick={() => fileRef.current?.click()}
-              className="border-2 border-dashed border-slate-600 hover:border-violet-500 rounded-xl p-6 cursor-pointer transition flex flex-col items-center gap-3"
-            >
-              {form.image ? (
-                <img
-                  src={form.image}
-                  alt="preview"
-                  className="w-full max-h-40 object-cover rounded-lg"
-                />
-              ) : (
-                <>
-                  <Upload size={28} className="text-slate-500" />
-                  <p className="text-slate-500 text-sm">
-                    Clique pour uploader une image
-                  </p>
-                </>
-              )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm text-slate-400 mb-2 block">
+                Image de la certification
+              </label>
+              <div
+                onClick={() => fileRef.current?.click()}
+                className="border-2 border-dashed border-slate-600 hover:border-violet-500 rounded-xl p-4 cursor-pointer transition flex flex-col items-center gap-2 h-28 justify-center"
+              >
+                {form.image ? (
+                  <img
+                    src={form.image}
+                    alt="preview"
+                    className="h-full object-contain rounded"
+                  />
+                ) : (
+                  <>
+                    <Upload size={22} className="text-slate-500" />
+                    <p className="text-slate-500 text-xs">
+                      Image du certificat
+                    </p>
+                  </>
+                )}
+              </div>
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFile(e, "image")}
+                className="hidden"
+              />
             </div>
-            <input
-              ref={fileRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImage}
-              className="hidden"
-            />
+
+            <div>
+              <label className="text-sm text-slate-400 mb-2 block">
+                Logo de l&apos;organisme
+              </label>
+              <div
+                onClick={() => logoRef.current?.click()}
+                className="border-2 border-dashed border-slate-600 hover:border-violet-500 rounded-xl p-4 cursor-pointer transition flex flex-col items-center gap-2 h-28 justify-center"
+              >
+                {form.logo ? (
+                  <img
+                    src={form.logo}
+                    alt="logo"
+                    className="h-full object-contain rounded"
+                  />
+                ) : (
+                  <>
+                    <Upload size={22} className="text-slate-500" />
+                    <p className="text-slate-500 text-xs">Logo organisme</p>
+                  </>
+                )}
+              </div>
+              <input
+                ref={logoRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleFile(e, "logo")}
+                className="hidden"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              { key: "title", label: "Titre" },
-              { key: "category", label: "Catégorie" },
-              { key: "link", label: "Lien du projet" },
-              { key: "tags", label: "Tags (séparés par virgule)" },
-            ].map(({ key, label }) => (
+            {(["title", "issuer", "date", "link"] as const).map((key) => (
               <div key={key}>
                 <label className="text-sm text-slate-400 mb-1 block">
-                  {label}
+                  {key === "title"
+                    ? "Titre"
+                    : key === "issuer"
+                      ? "Organisme"
+                      : key === "date"
+                        ? "Date"
+                        : "Lien de vérification"}
                 </label>
                 <input
-                  value={(form as any)[key]}
+                  value={form[key]}
                   onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                   className="w-full bg-[#0a0e1a] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
                 />
@@ -162,36 +174,18 @@ export default function AdminProjects() {
             ))}
             <div>
               <label className="text-sm text-slate-400 mb-1 block">
-                Couleur catégorie
+                Couleur
               </label>
               <div className="flex items-center gap-2">
                 <input
                   type="color"
-                  value={form.categoryColor}
-                  onChange={(e) =>
-                    setForm({ ...form, categoryColor: e.target.value })
-                  }
+                  value={form.color}
+                  onChange={(e) => setForm({ ...form, color: e.target.value })}
                   className="w-10 h-10 rounded cursor-pointer border-0 bg-transparent"
                 />
-                <span className="text-slate-400 text-sm">
-                  {form.categoryColor}
-                </span>
+                <span className="text-slate-400 text-sm">{form.color}</span>
               </div>
             </div>
-          </div>
-
-          <div>
-            <label className="text-sm text-slate-400 mb-1 block">
-              Description
-            </label>
-            <textarea
-              value={form.description}
-              onChange={(e) =>
-                setForm({ ...form, description: e.target.value })
-              }
-              rows={3}
-              className="w-full bg-[#0a0e1a] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500 resize-none"
-            />
           </div>
 
           <div className="flex gap-3">
@@ -212,78 +206,58 @@ export default function AdminProjects() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {projects.map((p, i) => (
+        {certs.map((cert, i) => (
           <div
             key={i}
             className="bg-[#111827] border border-slate-800 rounded-2xl overflow-hidden"
           >
-            {/* Image ou gradient */}
-            <div
-              className={`h-36 ${p.image ? "" : `bg-gradient-to-br ${p.bgColor}`} relative`}
-            >
-              {p.image ? (
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Image size={36} className="text-white/40" />
-                </div>
-              )}
-            </div>
-            <div className="p-4 space-y-2">
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="font-bold text-white">{p.title}</h3>
-                <span
-                  className="text-xs px-2 py-0.5 rounded-full shrink-0"
-                  style={{
-                    color: p.categoryColor,
-                    background: p.categoryColor + "20",
-                  }}
-                >
-                  {p.category}
-                </span>
-              </div>
-              <p className="text-slate-400 text-xs line-clamp-2">
-                {p.description}
-              </p>
-              <div className="flex flex-wrap gap-1">
-                {p.tags?.map((t: string) => (
-                  <span
-                    key={t}
-                    className="text-xs px-2 py-0.5 bg-slate-800 rounded text-slate-400"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-3 pt-1">
-                <button
-                  onClick={() => edit(i)}
-                  className="flex items-center gap-1 text-xs text-violet-400 hover:text-violet-300 transition"
-                >
-                  <Pencil size={12} /> Modifier
-                </button>
-                <button
-                  onClick={() =>
-                    setProjects((p) => p.filter((_, idx) => idx !== i))
-                  }
-                  className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300 transition"
-                >
-                  <Trash2 size={12} /> Supprimer
-                </button>
-                {p.link && p.link !== "#" && (
-                  <a
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 transition ml-auto"
-                  >
-                    <ExternalLink size={12} /> Voir
-                  </a>
+            {cert.image && (
+              <img
+                src={cert.image}
+                alt={cert.title}
+                className="w-full h-36 object-cover"
+              />
+            )}
+            <div className="p-5 flex items-start gap-3">
+              <div
+                className="p-2 rounded-xl shrink-0"
+                style={{ background: cert.color + "20" }}
+              >
+                {cert.logo ? (
+                  <img
+                    src={cert.logo}
+                    alt={cert.issuer}
+                    className="w-8 h-8 object-contain"
+                  />
+                ) : (
+                  <Award size={22} style={{ color: cert.color }} />
                 )}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p
+                  className="text-xs font-medium mb-1"
+                  style={{ color: cert.color }}
+                >
+                  {cert.issuer}
+                </p>
+                <h3 className="font-bold text-sm text-white">{cert.title}</h3>
+                <p className="text-slate-500 text-xs mt-1">{cert.date}</p>
+                <div className="flex gap-3 mt-3">
+                  <button
+                    onClick={() => edit(i)}
+                    className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1 transition"
+                  >
+                    <Pencil size={12} /> Modifier
+                  </button>
+                  <button
+                    onClick={() =>
+                      setCerts((c) => c.filter((_, idx) => idx !== i))
+                    }
+                    className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition"
+                  >
+                    <Trash2 size={12} /> Supprimer
+                  </button>
+                </div>
               </div>
             </div>
           </div>
