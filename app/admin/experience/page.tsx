@@ -6,17 +6,32 @@ import {
   educationData as initEdu,
 } from "@/lib/data";
 
-type Entry = {
-  role?: string;
-  degree?: string;
-  company?: string;
-  school?: string;
-  location: string;
-  period: string;
-  periodColor: string;
-  description: string;
-  tags: string[];
-};
+function buildForm(type: "work" | "edu", initial: any) {
+  const baseTags = Array.isArray(initial?.tags)
+    ? initial.tags.join(", ")
+    : (initial?.tags ?? "");
+
+  const base = {
+    location: initial?.location ?? "",
+    period: initial?.period ?? "",
+    periodColor: initial?.periodColor ?? "#7c3aed",
+    description: initial?.description ?? "",
+    tags: baseTags,
+  };
+
+  if (type === "work") {
+    return {
+      role: initial?.role ?? "",
+      company: initial?.company ?? "",
+      ...base,
+    };
+  }
+  return {
+    degree: initial?.degree ?? "",
+    school: initial?.school ?? "",
+    ...base,
+  };
+}
 
 function EntryForm({
   initial,
@@ -29,24 +44,7 @@ function EntryForm({
   onCancel: () => void;
   type: "work" | "edu";
 }) {
-  const [form, setForm] = useState(() => {
-    const baseTags = Array.isArray(initial?.tags)
-      ? initial.tags.join(", ")
-      : (initial?.tags ?? "");
-
-    return {
-      ...(type === "work"
-        ? { role: "", company: "" }
-        : { degree: "", school: "" }),
-      location: "",
-      period: "",
-      periodColor: "#7c3aed",
-      description: "",
-      tags: "",
-      ...initial,
-      tags: baseTags, // ← écrase le spread proprement via initializer function
-    };
-  });
+  const [form, setForm] = useState(() => buildForm(type, initial));
 
   return (
     <div className="bg-[#0a0e1a] border border-slate-700 rounded-xl p-5 space-y-4">
@@ -56,8 +54,10 @@ function EntryForm({
             <div>
               <label className="text-xs text-slate-400 mb-1 block">Poste</label>
               <input
-                value={form.role}
-                onChange={(e) => setForm({ ...form, role: e.target.value })}
+                value={(form as any).role ?? ""}
+                onChange={(e) =>
+                  setForm({ ...form, role: e.target.value } as any)
+                }
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
@@ -66,8 +66,10 @@ function EntryForm({
                 Entreprise
               </label>
               <input
-                value={form.company}
-                onChange={(e) => setForm({ ...form, company: e.target.value })}
+                value={(form as any).company ?? ""}
+                onChange={(e) =>
+                  setForm({ ...form, company: e.target.value } as any)
+                }
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
@@ -79,16 +81,20 @@ function EntryForm({
                 Diplôme
               </label>
               <input
-                value={form.degree}
-                onChange={(e) => setForm({ ...form, degree: e.target.value })}
+                value={(form as any).degree ?? ""}
+                onChange={(e) =>
+                  setForm({ ...form, degree: e.target.value } as any)
+                }
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
             <div>
               <label className="text-xs text-slate-400 mb-1 block">École</label>
               <input
-                value={form.school}
-                onChange={(e) => setForm({ ...form, school: e.target.value })}
+                value={(form as any).school ?? ""}
+                onChange={(e) =>
+                  setForm({ ...form, school: e.target.value } as any)
+                }
                 className="w-full bg-[#111827] border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-violet-500"
               />
             </div>
@@ -261,7 +267,6 @@ export default function AdminExperience() {
 
   return (
     <div className="p-6 text-white space-y-10">
-      {/* Expériences */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold flex items-center gap-2">
@@ -309,7 +314,6 @@ export default function AdminExperience() {
 
       <div className="border-t border-slate-800" />
 
-      {/* Formation */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold flex items-center gap-2">
