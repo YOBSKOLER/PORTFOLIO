@@ -195,7 +195,7 @@ export const skillsData = [
       {
         name: "Linux",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "GitHub Actions",
@@ -205,7 +205,7 @@ export const skillsData = [
       {
         name: "AWS",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Kubernetes",
@@ -247,7 +247,7 @@ export const skillsData = [
       {
         name: "Redis",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Tableau",
@@ -276,6 +276,24 @@ export const certifications = [
 
 export const experienceData = [
   {
+    role: "Computer Science Intern",
+    objective: "Intership",
+    objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
+    company: "IUT Douala (IT Lab)",
+    location: "Douala, Cameroon",
+    period: "5 july 2026 - Now",
+    periodColor: "#f97316",
+    periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
+    description:
+      "During my one‑month internship at the IT unit of IUT, I contributed to the integration and consolidation of BTS and HNT exam results into the official application of the Ministry of Higher Education (examensdauq.com). My role involved ensuring data accuracy, supporting the digital workflow, and collaborating with the team to streamline the reporting process. This experience allowed me to apply my computer science knowledge in a real institutional context, bridging academic records with national education systems.",
+    tags: [
+      "Data Integration",
+      "Data Accuracy & Validation",
+      "Educational IT Systems",
+      "Collaboration & Teamwork",
+    ],
+  },
+  {
     role: "Fullstack Developer",
     objective: "Intership",
     objectiveBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
@@ -285,7 +303,7 @@ export const experienceData = [
     periodColor: "#f97316",
     periodBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
     description:
-      "Designed and developed an e-commerce platform and transit management solution. Integrated secure payment gateways and implemented route optimization algorithms. Created a responsive mobile app using React Native.",
+      "Contributed to the development of Glotelho Delivery, an internal logistics platform for managing deliveries and order fulfillment. Designed and developed RESTful APIs using Laravel, integrated Magento APIs for automatic order synchronization, and implemented scheduled background tasks with Laravel Scheduler. Built responsive administration interfaces with React, including delivery tracking, courier management, pagination, and authentication features. This experience strengthened my skills in full-stack development, API integration, and building scalable business applications.",
     tags: ["Laravel", "Sactum", "React JS", "MySQL", "Docker"],
   },
 ];
@@ -334,38 +352,46 @@ export const educationData = [
 
 export const professionalProjects = [
   {
-    title: "Academy Twentyone",
-    category: "Site/Blog & Events",
+    title: "GLOTELHO DELIVERTY",
+    category: "Fintech Platform",
     categoryColor: "#7c3aed",
     categoryBadgeClass: "text-[#7c3aed] bg-[#7c3aed]/20",
     bgColor: "from-purple-600 to-violet-800",
     description:
-      "Site/Blog for cameroonian billionaire Raoul Ruben Njionou's Academy Twenty One, for organizing events and presenting his company.",
+      "Glotelho Delivery is an intern delivery management platform designed to streamline the processing and tracking of customer orders from Magento. The application automates order imports, manages delivery assignments, and monitors delivery statuses through a modern administrative dashboard. Build for glotelho delivers  it provides a scalable and efficient solution for logistics operations.",
     tags: ["Laravel", "PostgreSQL", "Redis"],
     link: "#",
   },
   {
-    title: "Sekure",
-    category: "Fintech Platform",
+    title: "IUT GATE",
+    category: "Site/Blog & Events",
     categoryColor: "#06b6d4",
     categoryBadgeClass: "text-[#06b6d4] bg-[#06b6d4]/20",
     bgColor: "from-emerald-400 to-teal-600",
     description:
-      "Website for a Cameroonian fintech app specializing in bill payments and virtual credit card issuance.",
-    tags: ["Laravel", "Tailwindcss", "Shadcn UI", "Alpinejs"],
-    link: "#",
+      "IUT GATE is the official digital portal of IUT Douala, created by a team of seven Computer Engineering students. The platform centralizes academic information for more than 39 programs and 9 departments, offering a complete content management system. It features an AI‑powered career analysis tool that guides students toward professional opportunities. An interactive map with geolocation and an admin dashboard with role‑based access ensure usability and control. Automated newsletters and SEO optimization strengthen communication and visibility. Successfully deployed with a custom domain, the project is live and accessible to the public.                                                        ",
+    tags: [
+      "React.js",
+      "Node.js/Express",
+      "PostgreSQL",
+      "Role‑Based Access Control(RBAC)",
+      " CI/CD",
+      "AI Integration",
+      "SEO & Web Optimization",
+    ],
+    link: "https://iut-dla.com",
   },
-  {
-    title: "Lamtrac",
-    category: "ERP Platform",
-    categoryColor: "#f97316",
-    categoryBadgeClass: "text-[#f97316] bg-[#f97316]/20",
-    bgColor: "from-orange-400 to-amber-600",
-    description:
-      "Platform for internal management of dealerships and customers for a tractor manufacturing company.",
-    tags: ["Laravel", "React", "Redis", "PostgreSQL", "Docker"],
-    link: "#",
-  },
+  // {
+  //   title: "Lamtrac",
+  //   category: "ERP Platform",
+  //   categoryColor: "#f97316",
+  //   categoryBadgeClass: "text-[#f97316] bg-[#f97316]/20",
+  //   bgColor: "from-orange-400 to-amber-600",
+  //   description:
+  //     "Platform for internal management of dealerships and customers for a tractor manufacturing company.",
+  //   tags: ["Laravel", "React", "Redis", "PostgreSQL", "Docker"],
+  //   link: "#",
+  // },
 ];
 
 export const personalProjects = [
