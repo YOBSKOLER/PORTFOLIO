@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useLang } from "@/components/providers/LanguageProvider";
 import { ParticlesBackground } from "@/components/ui/ParticlesBackground";
@@ -19,10 +20,6 @@ const techIcons = [
     alt: "Laravel",
   },
   {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
-    alt: "NestJS",
-  },
-  {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
     alt: "PostgreSQL",
   },
@@ -33,10 +30,6 @@ const techIcons = [
   {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
     alt: "Docker",
-  },
-  {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    alt: "MongoDB",
   },
 ];
 
@@ -65,12 +58,12 @@ export function Hero() {
             transition={{ duration: 0.7 }}
             className="space-y-6"
           >
-            <div className="inline-flex items-center gap-2 bg-violet/10 border border-violet/30 rounded-full px-4 py-2 text-violet-light text-sm">
+            <div className="inline-flex items-center gap-2 bg-violet/10 border backdrop-blur-md border-violet/30 rounded-full px-4 py-2 text-violet-light text-sm">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               Available for work
             </div>
 
-            <div className="inline-flex items-center gap-2 bg-violet/10 border border-violet/30 rounded-full px-4 py-2 text-violet-light text-sm">
+            <div className="inline-flex items-center gap-2 bg-violet/10 border backdrop-blur-md border-violet/30 rounded-full px-4 py-2 text-violet-light text-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
               AI Engeneering & Data Science Enthusiast
             </div>
@@ -127,14 +120,12 @@ export function Hero() {
               <p className="text-slate-500 text-sm mb-3">{t.hero.crafting}</p>
               <div className="flex flex-wrap gap-3">
                 {techIcons.map((icon) => (
-                  <div
-                    key={icon.alt}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800/70 p-1 opacity-80 transition hover:scale-110 hover:opacity-100"
-                  >
-                    <span className="text-xs font-semibold text-slate-200">
-                      {icon.alt}
-                    </span>
-                  </div>
+                  // eslint-disable-next-line react/jsx-key
+                  <img
+                    src={icon.src}
+                    alt={icon.alt}
+                    className="w-5 h-5 object-contain shrink-0 group-hover:scale-110 transition"
+                  />
                 ))}
               </div>
             </div>
@@ -167,11 +158,16 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="absolute -bottom-4 -right-4 bg-navy-800  border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-2 shadow-xl"
+                className="absolute -bottom-4 -right-4 bg-navy-800  border backdrop-blur-md border-slate-700 rounded-xl px-4 py-3 flex items-center gap-2 shadow-xl"
               >
-                <MapPin size={20} className="text-violet-light  animate-bounce" />
+                <MapPin
+                  size={20}
+                  className="text-violet-light  animate-bounce"
+                />
                 <div>
-                  <div className="text-xs text-slate-400 font-semibold">{t.hero.basedIn}</div>
+                  <div className="text-xs text-slate-400 font-semibold">
+                    {t.hero.basedIn}
+                  </div>
                   <div className="text-sm font-bold text-violet-light">
                     {t.hero.location}
                   </div>

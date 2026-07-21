@@ -30,7 +30,7 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="bg-navy-800/60 border border-slate-700/50 rounded-xl overflow-hidden hover:border-violet/40 transition group"
+      className="bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-xl overflow-hidden hover:border-violet/40 transition group"
     >
       {/* Color banner */}
       <div
@@ -110,7 +110,7 @@ export function Projects() {
 
         {/* Tabs */}
         <div className="flex justify-center mb-10">
-          <div className="flex bg-navy-800/60 border border-slate-700/50 rounded-xl p-1 gap-1">
+          <div className="flex bg-navy-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-1 gap-1">
             {(["professional", "personal"] as const).map((t_) => (
               <button
                 key={t_}

@@ -64,12 +64,12 @@ export const skillsData = [
       {
         name: "NestJS",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "FastAPI",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Spring Boot",
@@ -99,6 +99,11 @@ export const skillsData = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     skills: [
       {
+        name: "Git",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        unlocked: true,
+      },
+      {
         name: "React Native",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
         unlocked: true,
@@ -106,17 +111,12 @@ export const skillsData = [
       {
         name: "Expo",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/expo/expo-original.svg",
-        unlocked: true,
-      },
-      {
-        name: "Git",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Android (Kotlin)",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Flutter",
@@ -146,14 +146,19 @@ export const skillsData = [
         unlocked: true,
       },
       {
+        name: "Java",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        unlocked: true,
+      },
+      {
         name: "Python",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Kotlin",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Rust",
@@ -164,11 +169,6 @@ export const skillsData = [
         name: "Go",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg",
         unlocked: false,
-      },
-      {
-        name: "Java",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-        unlocked: true,
       },
       {
         name: "C++",
@@ -182,6 +182,11 @@ export const skillsData = [
     color: "#3b82f6",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
     skills: [
+      {
+        name: "CI/CD",
+        icon: "https://tse3.mm.bing.net/th/id/OIP.J61N6jNTaNsSouz1bhicQAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+        unlocked: true,
+      },
       {
         name: "Docker",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
@@ -261,7 +266,7 @@ export const skillsData = [
 export const certifications = [
   {
     title: "Coming Soon",
-    issuer: "Your First Certification",
+    issuer: "M First Certification",
     date: "2025",
     color: "#7c3aed",
     logo: "",

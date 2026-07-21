@@ -86,7 +86,7 @@ export function About() {
   const a = t.about;
 
   return (
-    <section id="about" className="relative py-24 overflow-hidden">
+    <section id="about" className="relative py-24 overflow-hidden ">
       <ParticlesBackground />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -113,6 +113,7 @@ export function About() {
               viewport={{ once: true }}
               custom={0}
               variants={fadeUp}
+              className=" backdrop-blur-md"
             >
               <h3 className="text-2xl font-bold text-white mb-4">
                 {a.journey}
@@ -128,6 +129,7 @@ export function About() {
               viewport={{ once: true }}
               custom={1}
               variants={fadeUp}
+              className="backdrop-blur-md"
             >
               <h3 className="text-2xl font-bold text-white mb-3">
                 {a.competencies}
@@ -167,7 +169,7 @@ export function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-navy-800/60 border border-slate-700/50 rounded-xl p-6 space-y-5"
+              className="bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-xl p-6 space-y-5"
             >
               <h3 className="text-xl font-bold text-white">
                 {a.personalDetails}
@@ -200,7 +202,7 @@ export function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-navy-800/60 border border-slate-700/50 rounded-xl p-6"
+              className="bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-xl p-6"
             >
               <h3 className="text-xl font-bold text-white mb-4">
                 {a.interests}
@@ -223,7 +225,7 @@ export function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-navy-800/60 border border-slate-700/50 rounded-xl p-6"
+              className="bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-xl p-6"
             >
               <h3 className="text-xl font-bold text-white mb-2">
                 {a.consultancy}

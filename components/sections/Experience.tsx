@@ -27,7 +27,7 @@ function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="relative flex gap-6"
+      className="relative flex gap-6 "
     >
       {/* Dot */}
       <div className="flex flex-col items-center">
@@ -38,7 +38,7 @@ function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
       </div>
 
       {/* Card */}
-      <div className="flex-1 bg-navy-800/60 border border-slate-700/50 rounded-xl p-6 mb-6 hover:border-violet/40 transition">
+      <div className="flex-1 bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-xl p-6 mb-6 hover:border-violet/40 transition">
         <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
           <h3 className="text-xl font-bold text-white">
             {item.role || item.degree}
@@ -99,13 +99,12 @@ export function Experience() {
           </h2>
           <p className="text-slate-400">{t.experience.subtitle}</p>
         </motion.div>
-
         <div className="mb-20">
           {experienceData.map((item, i) => (
             <TimelineCard key={i} item={item} index={i} />
           ))}
         </div>
-
+        
         {/* Education */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -121,7 +120,6 @@ export function Experience() {
           </h2>
           <p className="text-slate-400">{t.experience.educationSubtitle}</p>
         </motion.div>
-
         <div>
           {educationData.map((item, i) => (
             <TimelineCard key={i} item={item} index={i} />

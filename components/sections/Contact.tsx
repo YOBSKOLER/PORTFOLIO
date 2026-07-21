@@ -16,14 +16,14 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "hi@yobskoler.com",
-    href: "mailto:hi@yobskoler.com",
+    value: "yobskoler9@gmail.com",
+    href: "mailto:yobskoler9@gmail.com",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+237 6XX XXX XXX",
-    href: "tel:+237600000000",
+    value: "+237 653 639 816",
+    href: "tel:+237653639816",
   },
   { icon: MapPin, label: "Location", value: "Douala, Cameroon", href: "#" },
   {
@@ -78,7 +78,7 @@ export function Contact() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-navy-800/60 border border-slate-700/50 rounded-2xl p-8 space-y-5"
+            className="bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-2xl p-8 space-y-5"
           >
             <h3 className="text-xl font-bold text-white">
               {t.contact.sendMessage}
@@ -137,7 +137,7 @@ export function Contact() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-6 bg-navy-800/60 border backdrop-blur-md border-slate-700/50 rounded-xl p-4 hover:border-violet/40 transition group"
           >
             <h3 className="text-xl font-bold text-white">
               {t.contact.contactDetails}
