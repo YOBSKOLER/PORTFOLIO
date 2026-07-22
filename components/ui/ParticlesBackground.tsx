@@ -99,12 +99,12 @@ export function ParticlesBackground() {
           const maxSq = LINK_DISTANCE * LINK_DISTANCE;
           if (distSq < maxSq) {
             const dist = Math.sqrt(distSq);
-            const opacity = (1 - dist / LINK_DISTANCE) * (isMobile ? 0.3 : 0.5);
+            const opacity = (1 - dist / LINK_DISTANCE) * 0.5;
             ctx!.beginPath();
             ctx!.moveTo(particles[i].x, particles[i].y);
             ctx!.lineTo(particles[j].x, particles[j].y);
             ctx!.strokeStyle = `rgba(139, 92, 246, ${opacity})`;
-            ctx!.lineWidth = 0.5;
+            ctx!.lineWidth = 0.8;
             ctx!.stroke();
           }
         }
