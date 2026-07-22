@@ -13,7 +13,7 @@ export function ParticlesBackground() {
     // Détecte mobile
     const isMobile = window.innerWidth < 768;
     const PARTICLE_COUNT = isMobile ? 30 : 100;
-    const LINK_DISTANCE = isMobile ? 100 : 200;
+    const LINK_DISTANCE = 200;
     const SPEED = isMobile ? 0.4 : 0.9;
     const MOUSE_ENABLED = !isMobile;
 
@@ -61,7 +61,7 @@ export function ParticlesBackground() {
 
         // Limite vitesse
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        if (speed > 1.5) {
+        if (speed > 1.95) {
           this.vx = (this.vx / speed) * 1.5;
           this.vy = (this.vy / speed) * 1.5;
         }
@@ -99,7 +99,7 @@ export function ParticlesBackground() {
           const maxSq = LINK_DISTANCE * LINK_DISTANCE;
           if (distSq < maxSq) {
             const dist = Math.sqrt(distSq);
-            const opacity = (1 - dist / LINK_DISTANCE) * 0.5;
+            const opacity = (1 - dist / LINK_DISTANCE) * 0.7;
             ctx!.beginPath();
             ctx!.moveTo(particles[i].x, particles[i].y);
             ctx!.lineTo(particles[j].x, particles[j].y);
