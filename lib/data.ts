@@ -310,7 +310,20 @@ export const experienceData = [
 
 export const educationData = [
   {
-    degree: "Master of Engineering in Data Science & AI",
+    degree: "Professional Bachelor’s in Software Engineering",
+    school: "IUT Douala",
+    objective: "LIC",
+    objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
+    location: "Douala, Cameroon",
+    period: "2022 - 2025",
+    periodColor: "#7c3aed",
+    periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
+    description:
+      "Actually completing a Professional Bachelor’s in Software Engineering (Licence en Génie Logiciel) at IUT Douala, with a focus on software design, development, and deployment of production‑ready systems.",
+    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
+  },
+  {
+    degree: "University Diploma of Technology in Computer Engineering ",
     school: "IUT Douala",
     objective: "DUT",
     objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
@@ -323,7 +336,7 @@ export const educationData = [
     tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
   },
   {
-    degree: "Master of Engineering in Data Science & AI",
+    degree: "University Diploma of Technology in Computer Engineering ",
     school: "IUT Douala",
     objective: "DUT",
     objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
@@ -336,7 +349,7 @@ export const educationData = [
     tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
   },
   {
-    degree: "Bachelor of Science in Computer Science",
+    degree: "GCE A/L",
     school: "GBHS Bobongo",
     objective: "GCE A/L",
     objectiveBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",

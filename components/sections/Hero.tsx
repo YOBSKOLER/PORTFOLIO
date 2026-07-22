@@ -120,11 +120,11 @@ export function Hero() {
               <p className="text-slate-500 text-sm mb-3">{t.hero.crafting}</p>
               <div className="flex flex-wrap gap-3">
                 {techIcons.map((icon) => (
-                  // eslint-disable-next-line react/jsx-key
                   <img
+                    key={icon.alt} 
                     src={icon.src}
                     alt={icon.alt}
-                    className="w-5 h-5 object-contain shrink-0 group-hover:scale-110 transition"
+                    className="w-8 h-8 opacity-80 hover:opacity-100 transition hover:scale-110"
                   />
                 ))}
               </div>
