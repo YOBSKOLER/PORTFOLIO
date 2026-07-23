@@ -35,9 +35,42 @@ const contactDetails = [
 ];
 
 const socials = [
-  { icon: Globe2, href: "https://github.com", label: "GitHub" },
-  { icon: Send, href: "https://twitter.com", label: "Twitter" },
-  { icon: MessagesSquare, href: "https://linkedin.com", label: "LinkedIn" },
+  {
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+    href: "https://github.com/YOBSKOLER",
+    label: "GitHub",
+    fill: "white",
+  },
+  {
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg",
+    href: "https://gitlab.com",
+    label: "GitLab",
+    fill: "white",
+  },
+  {
+    icon: "https://www.svgrepo.com/show/271111/reddit.svg",
+    href: "https://reddit.com",
+    label: "Reddit",
+    fill: "white",
+  },
+  {
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/twitter/twitter-original.svg",
+    href: "https://twitter.com",
+    label: "Twitter",
+    fill: "",
+  },
+  {
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg",
+    href: "https://www.facebook.com/profile.php?id=61572933984252",
+    label: "Facebook",
+    fill: "",
+  },
+  {
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg",
+    href: "https://linkedin.com",
+    label: "LinkedIn",
+    fill: "",
+  },
 ];
 
 export function Contact() {
@@ -179,7 +212,12 @@ export function Contact() {
                     aria-label={label}
                     className="p-3 bg-navy-800/60 border border-slate-700/50 rounded-xl hover:border-violet/40 hover:bg-violet/10 text-slate-400 hover:text-violet-light transition"
                   >
-                    <Icon size={20} />
+                    <img
+                      src={Icon}
+                      alt={label}
+                      className={`w-5 h-5 object-contain shrink-0 group-hover:scale-110 transition
+                       ${label === "GitHub" || label === "Twitter" ? "filter brightness-0 invert" : ""}`}
+                    />
                   </a>
                 ))}
               </div>

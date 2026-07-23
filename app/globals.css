@@ -26,3 +26,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
 }
+.icon-white {
+  filter: brightness(1) invert(1);
+}
