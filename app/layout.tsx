@@ -6,11 +6,11 @@ import { LanguageProvider } from "@/components/providers/LanguageProvider";
 
 const geist = Geist({ subsets: ["latin"] });
 
-const BASE_URL = "https://portfolio-yobskohler.vercel.app/"; 
+const BASE_URL = "https://portfolio-yobskohler.vercel.app/"; // ← ta vraie URL ici
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL), // ← TRÈS IMPORTANT pour les images
-  title: "YOBS KOLER — Fullstack Developer",
+  metadataBase: new URL(BASE_URL),
+  title: "YOBS KOLER - Fullstack Developer",
   description:
     "Développeur Fullstack & Mobile basé à Douala, Cameroun. Spécialisé en React, Next.js, Laravel, React Native.",
   openGraph: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "YOBS KOLER Portfolio",
     images: [
       {
-        url: "/images/og-image.jpg", // relatif grâce à metadataBase
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "YOBS KOLER — Fullstack Developer",
