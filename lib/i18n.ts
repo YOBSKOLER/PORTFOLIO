@@ -30,7 +30,7 @@ export const translations = {
       subtitle:
         "Software engineer passionate about creating solutions at the intersection of web and mobile",
       journey: "My journey",
-      bio1: "I'm a fullstack developer based in Douala, Cameroon, passionate about the transformative power of technology. I've developed expertise in building modern web applications and exploring mobile development & DevOps , fields critical for future advancements.",
+      bio1: "I’m Dagang Tchuikoua Yobs Koler, a 22‑year‑old computer scientist and full‑stack developer based in Douala, Cameroon. Driven by a passion for the transformative power of technology, I specialize in building modern, scalable web applications and exploring the frontiers of data science and artificial intelligence—fields that are shaping the future.My journey began in 2024 with web development, where I gained a strong foundation in creating user‑centric applications with intuitive interfaces. Since then, I’ve expanded my expertise across the full software development lifecycle, from design and architecture to deployment of production‑ready systems.",
       bio2: "My journey spans frontend, backend, database modeling, and server deployment across diverse projects. With years of professional experience, I've mastered various technology stacks and methodologies that enable me to tackle complex problems.",
       competencies: "Core competencies",
       competenciesDesc:

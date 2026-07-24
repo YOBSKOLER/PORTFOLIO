@@ -9,6 +9,7 @@ type Entry = {
   _id: string;
   role?: string;
   degree?: string;
+  objective?: string;
   company?: string;
   school?: string;
   location: string;
@@ -47,11 +48,21 @@ function TimelineCard({ item, index }: { item: Entry; index: number }) {
               background: item.periodColor + "15",
             }}
           >
+            {item.objective}
+          </span>
+          <span
+            className="text-xs font-semibold px-3 py-1 rounded-full border shrink-0"
+            style={{
+              color: item.periodColor,
+              borderColor: item.periodColor + "60",
+              background: item.periodColor + "15",
+            }}
+          >
             {item.period}
           </span>
         </div>
         <p className="text-violet-light text-sm font-medium mb-3">
-          {item.company ?? item.school} — {item.location}
+          {item.company ?? item.school} - {item.location}
         </p>
         <p className="text-slate-400 text-sm leading-relaxed mb-4">
           {item.description}

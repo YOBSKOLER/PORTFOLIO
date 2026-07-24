@@ -1,4 +1,4 @@
-import {  } from "lucide-react";
+import {} from "lucide-react";
 export const skillsData = [
   {
     category: "Frontend",
@@ -272,7 +272,7 @@ export const skillsData = [
 export const certifications = [
   {
     title: "Coming Soon",
-    issuer: "M First Certification",
+    issuer: "My First Certification",
     date: "2025",
     color: "#7c3aed",
     logo: "",
@@ -316,43 +316,61 @@ export const experienceData = [
 
 export const educationData = [
   {
-    degree: "Professional Bachelor’s in Software Engineering",
+    degree: "Bachelor’s in Software Engineering",
     school: "IUT Douala",
     objective: "LIC",
     objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     location: "Douala, Cameroon",
-    period: "2022 - 2025",
+    period: "2026 - 2027",
     periodColor: "#7c3aed",
     periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     description:
       "Actually completing a Professional Bachelor’s in Software Engineering (Licence en Génie Logiciel) at IUT Douala, with a focus on software design, development, and deployment of production‑ready systems.",
-    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
+    tags: [
+      "Advanced Algorithms & Data Structures",
+      "Software Architecture & Design Patterns",
+      "Distributed Systems & Cloud Computing",
+      "Object-Oriented Programming (Java,Python)",
+      "Project Management & Agile Methodologies",
+    ],
   },
   {
     degree: "University Diploma of Technology in Computer Engineering ",
     school: "IUT Douala",
-    objective: "DUT",
+    objective: "DUT 2",
     objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     location: "Douala, Cameroon",
     period: "2022 - 2025",
     periodColor: "#7c3aed",
     periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     description:
-      "Comprehensive program covering core computer science concepts with emphasis on algorithm design and analysis. Studied advanced software architecture patterns and distributed computing principles.",
-    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
+      "Comprehensive program covering core computer science concepts with strong emphasis on algorithm design, system architecture, and distributed computing. Includes practical training in backend and frontend development.",
+    tags: [
+      "Algorithm Design & Analysis",
+      "Software Architecture Principles",
+      "Distributed Systems & Networking",
+      "Object-Oriented Programming (Java)",
+      "Database Systems (SQL, MySQL)",
+    ],
   },
   {
     degree: "University Diploma of Technology in Computer Engineering ",
     school: "IUT Douala",
-    objective: "DUT",
+    objective: "DUT 1",
     objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     location: "Douala, Cameroon",
     period: "2022 - 2025",
     periodColor: "#7c3aed",
     periodBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
     description:
-      "Comprehensive program covering core computer science concepts with emphasis on algorithm design and analysis. Studied advanced software architecture patterns and distributed computing principles.",
-    tags: ["Algorithms", "Software Architecture", "Distributed Systems", "OOP"],
+      "Foundation year introducing mathematics, logic, and programming fundamentals. Built strong problem‑solving skills and understanding of computing systems.",
+    tags: [
+      "Mathematical Logic & Discrete Mathematics",
+      "Introduction to Algorithms",
+      "Programming Fundamentals",
+      "Computer Architecture & Operating Systems",
+      "Basic Networking Concepts",
+    ],
   },
   {
     degree: "GCE A/L",
@@ -364,7 +382,7 @@ export const educationData = [
     periodColor: "#f97316",
     periodBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
     description:
-      "Comprehensive program covering core computer science concepts with emphasis on algorithm design and analysis. Studied advanced software architecture patterns and distributed computing principles.",
+      "Focused on mathematics, sciences, and computing, providing a strong academic foundation for engineering studies.",
     tags: ["MATHS", "PHYSICS", "COMPUTER SCIENCE", "CHEMISTRY", "BIOLOGY"],
   },
 ];
@@ -379,6 +397,7 @@ export const professionalProjects = [
     description:
       "Glotelho Delivery is an intern delivery management platform designed to streamline the processing and tracking of customer orders from Magento. The application automates order imports, manages delivery assignments, and monitors delivery statuses through a modern administrative dashboard. Build for glotelho delivers  it provides a scalable and efficient solution for logistics operations.",
     tags: ["Laravel", "PostgreSQL", "Redis"],
+    image: '/images/projects/glotelho.jpg',
     link: "https://glotelho.cm/",
   },
   {
@@ -398,6 +417,7 @@ export const professionalProjects = [
       "AI Integration",
       "SEO & Web Optimization",
     ],
+    image: '/images/projects/iutgate.jpg',
     link: "https://iut-dla.com",
   },
   // {
@@ -414,16 +434,28 @@ export const professionalProjects = [
 ];
 
 export const personalProjects = [
+  // {
+  //   title: "MedApp",
+  //   category: "Healthcare",
+  //   categoryColor: "#10b981",
+  //   categoryBadgeClass: "text-[#10b981] bg-[#10b981]/20",
+  //   bgColor: "from-green-500 to-teal-700",
+  //   description:
+  //     "Medical appointment management system with Laravel REST API + React Native/Expo. Role-based access for patients and admins.",
+  //   tags: ["Laravel", "React Native", "Expo", "SQLite", "Sanctum"],
+  //   image: '/images/projects/academy21.jpg',
+  //   link: "#",
+  // },
   {
-    title: "MedApp",
-    category: "Healthcare",
-    categoryColor: "#10b981",
-    categoryBadgeClass: "text-[#10b981] bg-[#10b981]/20",
-    bgColor: "from-green-500 to-teal-700",
+    title: "Portfolio",
+    category: "Web App",
+    categoryColor: "#7c3aed",
+    bgColor: "from-violet-600 to-purple-800",
     description:
-      "Medical appointment management system with Laravel REST API + React Native/Expo. Role-based access for patients and admins.",
-    tags: ["Laravel", "React Native", "Expo", "SQLite", "Sanctum"],
-    link: "#",
+      "Mon portfolio personnel fullstack avec dashboard admin, blog intégré, et gestion complète du contenu depuis une interface d'administration.",
+    tags: ["Next.js", "Tailwind", "MongoDB", "TypeScript"],
+    link: "https://portfolio-yobskohler.vercel.app/",
+    image: "",
   },
   {
     title: "DevBlog",
@@ -432,8 +464,9 @@ export const personalProjects = [
     categoryBadgeClass: "text-[#3b82f6] bg-[#3b82f6]/20",
     bgColor: "from-blue-500 to-indigo-700",
     description:
-      "Personal technical blog built with Next.js and MDX, focused on web and mobile development in Africa.",
+      "Personal technical blog built with Next.js and MDX, My blog is comming soon",
     tags: ["Next.js", "MDX", "Tailwind", "Vercel"],
+    image: "/images/projects/academy21.jpg",
     link: "#",
   },
 ];

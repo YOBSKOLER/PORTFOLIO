@@ -27,29 +27,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -4 }}
       className="rounded-2xl overflow-hidden border border-slate-700/50 hover:border-violet-500/40 transition-all duration-300 flex flex-col"
-      style={{
-        background: "rgba(17,24,39,0.8)",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
-      }}
+      style={{ background: "rgba(17,24,39,0.8)" }}
     >
-      {/* Image ou gradient — hauteur auto */}
-      {project.image ? (
-        <div className="w-full overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-40 object-cover hover:scale-105 transition duration-500"
-          />
-        </div>
-      ) : (
-        <div
-          className={`h-28 bg-gradient-to-br ${project.bgColor} flex items-center justify-center`}
-        >
-          <Folder size={40} className="text-white/70" />
-        </div>
-      )}
+      {/* Image ou gradient */}
+      {/* Image ou gradient */}
+      <div className="w-full h-48 overflow-hidden relative">
+        {project.image ? (
+          <div className="w-full h-full bg-white flex items-center justify-center p-6">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-contain hover:scale-105 transition duration-500"
+            />
+          </div>
+        ) : (
+          <div
+            className={`w-full h-full bg-gradient-to-br ${project.bgColor} flex items-center justify-center`}
+          >
+            <Folder size={48} className="text-white/60" />
+          </div>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#111827] to-transparent" />
+      </div>
 
-      {/* Content — s'adapte au texte */}
+      {/* Content */}
       <div className="p-5 flex flex-col gap-3 flex-1">
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-base font-bold text-white leading-snug">

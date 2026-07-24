@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   // Open Graph — ce qui s'affiche quand tu partages le lien
   openGraph: {
     type: "website",
-    url: "https://ton-portfolio.vercel.app",
+    url: "https://portfolio-yobskohler.vercel.app/",
     title: "YOBS KOLER — Fullstack Developer",
     description:
       "Développeur Fullstack & Mobile basé à Douala, Cameroun. Je construis des solutions web & mobile scalables.",
     siteName: "YOBS KOLER Portfolio",
     images: [
       {
-        url: "https://ton-portfolio.vercel.app/images/og-image.jpg",
+        url: "https://portfolio-yobskohler.vercel.app/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "YOBS KOLER — Fullstack Developer",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "YOBS KOLER — Fullstack Developer",
     description: "Développeur Fullstack & Mobile basé à Douala, Cameroun.",
-    images: ["https://ton-portfolio.vercel.app/images/og-image.jpg"],
+    images: ["https://portfolio-yobskohler.vercel.app/images/og-image.jpg"],
     creator: "@yobskoler",
   },
 
