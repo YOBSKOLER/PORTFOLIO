@@ -60,7 +60,7 @@ export function Contact() {
       icon: Globe2,
       label: "LinkedIn",
       value: "linkedin.com/in/yobs-koler",
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/yobs-k%C3%B6ler-37859b385/",
     },
   ];
 
@@ -182,7 +182,7 @@ export function Contact() {
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : sent ? (
-                "✅ Message envoyé !"
+                " Message envoyé !"
               ) : (
                 <>
                   <Send size={16} /> {t.contact.send}
