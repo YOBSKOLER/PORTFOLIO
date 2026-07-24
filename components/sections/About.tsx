@@ -18,6 +18,7 @@ import {
 const interests = [
   "Opensource",
   "Big Tech",
+  "Silicon Valley",
   "Tech in Africa",
   "AI Research",
   "Startup",
@@ -31,6 +32,7 @@ const interestClasses = [
   "text-[#5c6aed] border-[#5c6aed]/50 bg-[#5c6aed]/15",
   "text-[#06b6d4] border-[#06b6d4]/50 bg-[#06b6d4]/15",
   "text-[#8b5cf6] border-[#8b5cf6]/50 bg-[#8b5cf6]/15",
+  "text-[#f97316] border-[#f97316]/50 bg-[#f97316]/15",
   "text-[#f97316] border-[#f97316]/50 bg-[#f97316]/15",
   "text-[#06b6d4] border-[#06b6d4]/50 bg-[#06b6d4]/15",
   "text-[#10b981] border-[#10b981]/50 bg-[#10b981]/15",

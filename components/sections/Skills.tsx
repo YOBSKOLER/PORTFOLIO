@@ -13,39 +13,46 @@ import {
   Database,
   Lock,
 } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 
 const categoryIcons = [Code2, Server, Smartphone, Terminal, Cloud, Database];
 
-const GITHUB_USERNAME = "YOBSKOLER";
+type Skill = {
+  name: string;
+  icon?: string;
+  lucideIcon?: string;
+  unlocked: boolean;
+};
 
-interface ContribDay {
-  date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
+// Résout l'icône : URL svg OU nom lucide
+function SkillIcon({ skill }: { skill: Skill }) {
+  if (skill.icon) {
+    return (
+      <img
+        src={skill.icon}
+        alt={skill.name}
+        className="w-5 h-5 object-contain shrink-0 group-hover:scale-110 transition"
+      />
+    );
+  }
+  if (skill.lucideIcon) {
+    const Icon = (
+      LucideIcons as Record<
+        string,
+        React.ComponentType<{ size?: number; className?: string }>
+      >
+    )[skill.lucideIcon];
+    if (Icon) return <Icon size={18} className="text-violet-400 shrink-0" />;
+  }
+  return <div className="w-5 h-5 rounded bg-slate-600 shrink-0" />;
 }
 
-function getColor(level: number) {
-  return (
-    ["#1e2535", "#3b1f6e", "#5b2da0", "#7c3aed", "#a78bfa"][level] ?? "#1e2535"
-  );
-}
-
-function SkillCard({
-  skill,
-  catColor,
-}: {
-  skill: { name: string; icon: string; unlocked: boolean };
-  catColor: string;
-}) {
+function SkillCard({ skill, catColor }: { skill: Skill; catColor: string }) {
   if (!skill.unlocked) {
     return (
       <div className="relative flex items-center gap-2 rounded-lg px-3 py-2 cursor-not-allowed select-none border border-slate-700/20 bg-slate-800/20 opacity-40">
-        <div className="relative shrink-0">
-          <img
-            src={skill.icon}
-            alt={skill.name}
-            className="w-5 h-5 object-contain grayscale"
-          />
+        <div className="relative shrink-0 grayscale">
+          <SkillIcon skill={skill} />
           <div className="absolute inset-0 bg-slate-900/50 rounded" />
         </div>
         <span className="text-slate-500 text-sm truncate">{skill.name}</span>
@@ -60,29 +67,30 @@ function SkillCard({
     <motion.div
       whileHover={{ scale: 1.05, y: -2 }}
       whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 300 }}
-      className="flex items-center gap-2 rounded-lg px-3 py-2 border border-slate-700/40 bg-navy-950/50 hover:bg-navy-950/80 transition cursor-default group"
-      style={{
-        boxShadow: `0 0 0 0 ${catColor}00`,
-      }}
-      onHoverStart={(e) => {
-        const el = e.target as HTMLElement;
+      className="flex items-center gap-2 rounded-lg px-3 py-2 border border-slate-700/40 bg-[#0a0e1a]/50 hover:bg-[#0a0e1a]/80 transition cursor-default group"
+      onMouseEnter={(e) => {
+        const el = e.currentTarget;
         el.style.boxShadow = `0 0 12px 1px ${catColor}40`;
         el.style.borderColor = `${catColor}60`;
       }}
-      onHoverEnd={(e) => {
-        const el = e.target as HTMLElement;
+      onMouseLeave={(e) => {
+        const el = e.currentTarget;
         el.style.boxShadow = "";
         el.style.borderColor = "";
       }}
     >
-      <img
-        src={skill.icon}
-        alt={skill.name}
-        className="w-5 h-5 object-contain shrink-0 group-hover:scale-110 transition"
-      />
+      <SkillIcon skill={skill} />
       <span className="text-slate-300 text-sm truncate">{skill.name}</span>
     </motion.div>
+  );
+}
+
+// GitHub Activity (inchangé — garde ton code actuel ici)
+const GITHUB_USERNAME = "YOBSKOLER";
+type ContribDay = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
+function getColor(level: number) {
+  return (
+    ["#1e2535", "#3b1f6e", "#5b2da0", "#7c3aed", "#a78bfa"][level] ?? "#1e2535"
   );
 }
 
@@ -101,11 +109,13 @@ function GitHubActivity() {
         return r.json();
       })
       .then((data) => {
-        const days: ContribDay[] = data.contributions.map((d: any) => ({
-          date: d.date,
-          count: d.count,
-          level: d.level,
-        }));
+        const days: ContribDay[] = data.contributions.map(
+          (d: { date: string; count: number; level: number }) => ({
+            date: d.date,
+            count: d.count,
+            level: d.level as 0 | 1 | 2 | 3 | 4,
+          }),
+        );
         const grouped: ContribDay[][] = [];
         for (let i = 0; i < days.length; i += 7)
           grouped.push(days.slice(i, i + 7));
@@ -143,13 +153,13 @@ function GitHubActivity() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-navy-800/60 border border-slate-700/50 rounded-2xl p-6 mt-10"
+      className="bg-[#111827]/80 border border-slate-700/50 rounded-2xl p-6 mt-10"
     >
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div>
           <h3 className="text-lg font-bold text-white flex items-center gap-2">
             <svg
-              className="w-5 h-5 text-violet-light"
+              className="w-5 h-5 text-violet-400"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -159,7 +169,7 @@ function GitHubActivity() {
           </h3>
           {!loading && !error && (
             <p className="text-slate-400 text-sm mt-1">
-              <span className="text-violet-light font-semibold">{total}</span>{" "}
+              <span className="text-violet-400 font-semibold">{total}</span>{" "}
               contributions in the last year
             </p>
           )}
@@ -168,7 +178,7 @@ function GitHubActivity() {
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-violet-light hover:text-violet border border-violet/30 px-3 py-1.5 rounded-lg transition"
+          className="text-xs text-violet-400 hover:text-violet-300 border border-violet-500/30 px-3 py-1.5 rounded-lg transition"
         >
           @{GITHUB_USERNAME}
         </a>
@@ -176,7 +186,7 @@ function GitHubActivity() {
 
       {loading && (
         <div className="flex items-center justify-center h-32">
-          <div className="w-6 h-6 border-2 border-violet border-t-transparent rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
         </div>
       )}
       {error && (
@@ -219,8 +229,8 @@ function GitHubActivity() {
                     {week.map((day, di) => (
                       <div
                         key={di}
-                        title={`${day.date}: ${day.count} contributions`}
-                        className="w-3 h-3 rounded-sm hover:ring-1 hover:ring-violet cursor-default transition"
+                        title={`${day.date}: ${day.count}`}
+                        className="w-3 h-3 rounded-sm hover:ring-1 hover:ring-violet-500 cursor-default transition"
                         style={{ background: getColor(day.level) }}
                       />
                     ))}
@@ -252,7 +262,6 @@ export function Skills() {
   return (
     <section id="skills" className="relative py-24 overflow-hidden">
       <ParticlesBackground />
-
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -262,12 +271,12 @@ export function Skills() {
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             {t.skills.title}{" "}
-            <span className="text-violet-light">{t.skills.titleAccent}</span>
+            <span className="text-violet-400">{t.skills.titleAccent}</span>
           </h2>
           <p className="text-slate-400 mb-4">{t.skills.subtitle}</p>
           <div className="flex items-center justify-center gap-6 text-xs text-slate-500">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-violet" />
+              <div className="w-2 h-2 rounded-full bg-violet-500" />
               <span>Maîtrisé</span>
             </div>
             <div className="flex items-center gap-2">
@@ -290,52 +299,41 @@ export function Skills() {
                 whileHover={{ y: -4 }}
                 className="rounded-2xl p-6 transition-all duration-300"
                 style={{
-                  background: "rgba(17, 24, 39, 0.6)",
+                  background: "rgba(17,24,39,0.7)",
                   border: `1.5px solid ${cat.color}40`,
-                  boxShadow: `0 0 24px 0 ${cat.color}15`,
-                }}
-                onHoverStart={(e) => {
-                  const el = (e.target as HTMLElement).closest(
-                    ".cat-card",
-                  ) as HTMLElement;
-                  if (el) el.style.boxShadow = `0 0 40px 4px ${cat.color}30`;
+                  boxShadow: `0 0 24px 0 ${cat.color}10`,
                 }}
               >
-                <div className="cat-card">
-                  {/* Header */}
-                  <div
-                    className="flex items-center gap-3 mb-5 pb-4"
-                    style={{ borderBottom: `1px solid ${cat.color}30` }}
+                <div
+                  className="flex items-center gap-3 mb-5 pb-4"
+                  style={{ borderBottom: `1px solid ${cat.color}30` }}
+                >
+                  <motion.div
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    className="p-2 rounded-lg"
+                    style={{ background: cat.color + "20" }}
                   >
-                    <motion.div
-                      whileHover={{ rotate: 10, scale: 1.1 }}
-                      className="p-2 rounded-lg"
-                      style={{ background: cat.color + "20" }}
-                    >
-                      <Icon size={20} style={{ color: cat.color }} />
-                    </motion.div>
-                    <span className="font-bold text-white text-lg">
-                      {cat.category}
-                    </span>
-                    <span
-                      className="ml-auto text-xs"
-                      style={{ color: cat.color + "aa" }}
-                    >
-                      {cat.skills.filter((s) => s.unlocked).length}/
-                      {cat.skills.length}
-                    </span>
-                  </div>
-
-                  {/* Skills */}
-                  <div className="grid grid-cols-2 gap-2">
-                    {cat.skills.map((skill) => (
-                      <SkillCard
-                        key={skill.name}
-                        skill={skill}
-                        catColor={cat.color}
-                      />
-                    ))}
-                  </div>
+                    <Icon size={20} style={{ color: cat.color }} />
+                  </motion.div>
+                  <span className="font-bold text-white text-lg">
+                    {cat.category}
+                  </span>
+                  <span
+                    className="ml-auto text-xs"
+                    style={{ color: cat.color + "aa" }}
+                  >
+                    {cat.skills.filter((s) => s.unlocked).length}/
+                    {cat.skills.length}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {cat.skills.map((skill) => (
+                    <SkillCard
+                      key={skill.name}
+                      skill={skill}
+                      catColor={cat.color}
+                    />
+                  ))}
                 </div>
               </motion.div>
             );

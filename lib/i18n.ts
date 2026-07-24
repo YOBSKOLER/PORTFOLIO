@@ -52,7 +52,7 @@ export const translations = {
       ageVal: "22 years",
       location2: "Location",
       education: "Education",
-      eduVal: "Master of Engineering in Data Science & AI",
+      eduVal: "Bachelor's in Software Engineering",
       interests: "Interests",
       consultancy: "Book a consultancy call",
       consultancyDesc:
