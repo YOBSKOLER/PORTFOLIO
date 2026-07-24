@@ -36,12 +36,12 @@ function SkillIcon({ skill }: { skill: Skill }) {
     );
   }
   if (skill.lucideIcon) {
-    const Icon = (
-      LucideIcons as Record<
-        string,
-        React.ComponentType<{ size?: number; className?: string }>
-      >
-    )[skill.lucideIcon];
+    // Cast via unknown pour éviter l'erreur TypeScript
+    const Icons = LucideIcons as unknown as Record<
+      string,
+      React.ComponentType<{ size?: number; className?: string }>
+    >;
+    const Icon = Icons[skill.lucideIcon];
     if (Icon) return <Icon size={18} className="text-violet-400 shrink-0" />;
   }
   return <div className="w-5 h-5 rounded bg-slate-600 shrink-0" />;
