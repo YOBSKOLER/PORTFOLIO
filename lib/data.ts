@@ -466,7 +466,7 @@ export const personalProjects = [
     description:
       "Personal technical blog built with Next.js and MDX, My blog is comming soon",
     tags: ["Next.js", "MDX", "Tailwind", "Vercel"],
-    image: "/images/projects/academy21.jpg",
+    image: "",
     link: "#",
   },
 ];
