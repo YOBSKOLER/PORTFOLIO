@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "YOBS KOLER Portfolio",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/og-image.jpg?v=2",
         width: 1200,
         height: 630,
         alt: "YOBS KOLER — Fullstack Developer",
