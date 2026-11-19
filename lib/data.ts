@@ -209,6 +209,11 @@ export const skillsData = [
         unlocked: true,
       },
       {
+        name: "Gitlap CI",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlap/gitlap-original.svg",
+        unlocked: true,
+      },
+      {
         name: "AWS",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
         unlocked: false,
