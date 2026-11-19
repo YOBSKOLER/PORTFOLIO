@@ -80,7 +80,7 @@ export const skillsData = [
       {
         name: "Django",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-        unlocked: false,
+        unlocked: true,
       },
       {
         name: "GraphQL",
@@ -110,12 +110,12 @@ export const skillsData = [
         unlocked: true,
       },
       {
-        name: "Trello",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-original.svg",
+        name: "JIRA",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg",
         unlocked: true,
       },
       {
-        name: "SDLC",
+        name: "SDLC/SCRUM",
         icon: "https://tse2.mm.bing.net/th/id/OIP.9-sJN5hF1sTApf-ljb0miQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
         unlocked: true,
       },
@@ -159,7 +159,7 @@ export const skillsData = [
       {
         name: "Python",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        unlocked: false,
+        unlocked: true,
       },
       {
         name: "Kotlin",
@@ -248,7 +248,7 @@ export const skillsData = [
       {
         name: "MongoDB",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-        unlocked: true,
+        unlocked: false,
       },
       {
         name: "Redis",
