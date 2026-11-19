@@ -287,16 +287,16 @@ export const certifications = [
 
 export const experienceData = [
   {
-    role: "Stagiaire développeur backend",
-    objective: "Intership-Remode",
-    objectiveBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
+    role: "Backend Developer Intern",
+    objective: "Internship",
+    objectiveBadgeClass: "text-[#f97316] border-[#f97847]/60 bg-[#f97847]/15",
     company: "Formuloo",
-    location: "Douala, Cameroun",
+    location: "Douala, Cameroon",
     period: "21/09/2026 – 16/11/2026",
     periodColor: "#f97316",
     periodBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
     description:
-      "Développement d'APIs de gestion de contacts avec Python, Django REST Framework puis FastAPI (CRUD, recherche et pagination). Sécurisation des APIs avec authentification JWT, gestion des rôles, validation des entrées et gestion centralisée des erreurs. Mise en place de tests pytest (44 tests, 96 % de couverture), du lint avec Ruff et de pipelines GitLab CI et GitHub Actions. Rédaction de la documentation Swagger/OpenAPI, versioning des APIs (v1/v2) et déploiement en staging et en production sur AWS Elastic Beanstalk. Travail en Scrum sur 3 sprints, avec présentations d'avancement et usage de Git/GitLab (branches et merge requests).",
+      "Developed contact management APIs with Python, Django REST Framework, and FastAPI, including CRUD operations, search, and pagination. Secured APIs with JWT authentication, role-based access, input validation, and centralized error handling. Added pytest coverage (44 tests, 96% coverage), Ruff linting, and GitLab CI and GitHub Actions pipelines. Documented APIs with Swagger/OpenAPI, implemented API versioning (v1/v2), and deployed to staging and production on AWS Elastic Beanstalk. Worked in Scrum across 3 sprints, presented progress, and used Git/GitLab branches and merge requests.",
     tags: [
       "Python",
       "Django REST Framework",
