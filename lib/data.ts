@@ -287,6 +287,26 @@ export const certifications = [
 
 export const experienceData = [
   {
+    role: "Stagiaire développeur backend",
+    objective: "Intership-Remode",
+    objectiveBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
+    company: "Formuloo",
+    location: "Douala, Cameroun",
+    period: "21/09/2026 – 16/11/2026",
+    periodColor: "#f97316",
+    periodBadgeClass: "text-[#f97316] border-[#f97316]/60 bg-[#f97316]/15",
+    description:
+      "Développement d'APIs de gestion de contacts avec Python, Django REST Framework puis FastAPI (CRUD, recherche et pagination). Sécurisation des APIs avec authentification JWT, gestion des rôles, validation des entrées et gestion centralisée des erreurs. Mise en place de tests pytest (44 tests, 96 % de couverture), du lint avec Ruff et de pipelines GitLab CI et GitHub Actions. Rédaction de la documentation Swagger/OpenAPI, versioning des APIs (v1/v2) et déploiement en staging et en production sur AWS Elastic Beanstalk. Travail en Scrum sur 3 sprints, avec présentations d'avancement et usage de Git/GitLab (branches et merge requests).",
+    tags: [
+      "Python",
+      "Django REST Framework",
+      "FastAPI",
+      "JWT",
+      "pytest",
+      "AWS Elastic Beanstalk",
+    ],
+  },
+  {
     role: "Computer Science Intern",
     objective: "Intership",
     objectiveBadgeClass: "text-[#7c3aed] border-[#7c3aed]/60 bg-[#7c3aed]/15",
