@@ -63,24 +63,24 @@ export const skillsData = [
         unlocked: true,
       },
       {
-        name: "NestJS",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
-        unlocked: false,
+        name: "Django",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
+        unlocked: true,
       },
       {
         name: "FastAPI",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
+        unlocked: true,
+      },
+      {
+        name: "NestJS",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
         unlocked: false,
       },
       {
         name: "Spring Boot",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
         unlocked: false,
-      },
-      {
-        name: "Django",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-        unlocked: true,
       },
       {
         name: "GraphQL",
@@ -199,11 +199,6 @@ export const skillsData = [
         unlocked: true,
       },
       {
-        name: "Linux",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-        unlocked: false,
-      },
-      {
         name: "GitHub Actions",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
         unlocked: true,
@@ -212,6 +207,11 @@ export const skillsData = [
         name: "Gitlap CI",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlap/gitlap-original.svg",
         unlocked: true,
+      },
+      {
+        name: "Linux",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+        unlocked: false,
       },
       {
         name: "AWS",
