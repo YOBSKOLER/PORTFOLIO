@@ -18,7 +18,7 @@ const techIcons = [
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
     alt: "Laravel",
   },
-    {
+  {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
     alt: "TypeScript",
   },
@@ -31,8 +31,8 @@ const techIcons = [
     alt: "Docker",
   },
   {
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    alt: "MongoDB",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+    alt: "MySQL",
   },
 ];
 
@@ -121,10 +121,13 @@ export function Hero() {
               <p className="text-slate-500 text-sm mb-3">{t.hero.crafting}</p>
               <div className="flex flex-wrap gap-3">
                 {techIcons.map((icon) => (
-                  <img
+                  <Image
                     key={icon.alt}
                     src={icon.src}
                     alt={icon.alt}
+                    width={32}
+                    height={32}
+                    unoptimized
                     className="w-8 h-8 opacity-80 hover:opacity-100 transition hover:scale-110"
                   />
                 ))}

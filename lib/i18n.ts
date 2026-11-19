@@ -20,7 +20,7 @@ export const translations = {
       yearsExp: "Years Experience",
       projects: "Projects Completed",
       clients: "Satisfied Clients",
-      crafting: "Currently crafting solutions in",
+      crafting: "Currently crafting solutions and main stack ",
       basedIn: "Based in",
       location: "Douala, Cameroon",
     },
